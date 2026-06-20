@@ -100,10 +100,10 @@ export default function LivePresence() {
             touchTimeoutRef.current = setTimeout(() => {
               setExtend(false);
               setHovered(false);
-            }, 2000);
+            }, 3000);
           }
         }}
-        className="flex items-center bg-card px-5 w-fit h-[50px] rounded-full border-2 border-border z-1"
+        className="flex items-center bg-card px-5 w-fit h-[50px] rounded-full border-2 border-border z-1 active:scale-90 transition-transform duration-250"
       >
         <div className="relative flex items-center">
           <span
