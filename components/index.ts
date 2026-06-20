@@ -3,6 +3,7 @@ export { default as LivePresence } from "./features/LivePresence";
 export { default as Nav } from "./features/Nav";
 export { default as EcosystemMap } from "./features/EcosystemMap";
 export { default as Footer } from "./features/Footer";
+export { default as ConnectionStatus } from "./features/ConnectionStatus";
 
 // Layout
 export { default as Intro } from "./layout/Intro";

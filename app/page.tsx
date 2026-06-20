@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ConnectionStatus,
   CurrentSection,
   Footer,
   GlobalStyles,
@@ -19,6 +20,7 @@ export default function Home() {
         <GlobalStyles />
         <LivePresence />
         <Nav />
+        <ConnectionStatus />
         <main>
           <CurrentSection />
         </main>
