@@ -183,8 +183,6 @@ function Home({ iconUrl }: { iconUrl: string }) {
   );
 }
 
-export async function GET(request: Request) {
-  const { origin } = new URL(request.url);
-
-  return new ImageResponse(<Home iconUrl={`${origin}/icon.png`} />, size);
+export async function GET() {
+  return new ImageResponse(<Home iconUrl={"https://devfolio-rv-caleb-v3.vercel.app/og"} />, size);
 }

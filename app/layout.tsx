@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og",
+        url: "https://devfolio-rv-caleb-v3.vercel.app/og",
         width: 1200,
         height: 630,
         alt: "Ruben Caleb Portfolio — Full-Stack Developer",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     description: "Projects, experiments, and web development work.",
     images: [
       {
-        url: "/og",
+        url: "https://devfolio-rv-caleb-v3.vercel.app/og",
         width: 1200,
         height: 630,
         alt: "Ruben Caleb Portfolio — Full-Stack Developer",
