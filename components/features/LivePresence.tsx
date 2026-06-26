@@ -1,8 +1,9 @@
-"use client"
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "../";
+import { useAuthContext } from "@/context";
 
 const tooltipVariants = {
   hidden: {
@@ -27,7 +28,7 @@ export default function LivePresence() {
   const [hovered, setHovered] = useState(false);
   const [extend, setExtend] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-  const online = true;
+  const { isOnline } = useAuthContext();
 
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -109,7 +110,7 @@ export default function LivePresence() {
       >
         <div className="relative flex items-center">
           <span
-            className={`w-2 h-2 rounded-full ${online ? "bg-[#7CA982]" : "bg-[#CC7E7E]"}`}
+            className={`w-2 h-2 rounded-full ${isOnline ? "bg-[#7CA982]" : "bg-[#CC7E7E]"}`}
             style={{ animation: "pulse-dot 2.4s ease-in-out infinite" }}
           />
         </div>
@@ -129,10 +130,10 @@ export default function LivePresence() {
                 className="font-mono text-[10px] tracking-widest uppercase truncate"
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
-                  color: online ? "#7CA982" : "#CC7E7E",
+                  color: isOnline ? "#7CA982" : "#CC7E7E",
                 }}
               >
-                {online ? "Online" : "Offline"}
+                {isOnline ? "Online" : "Offline"}
               </motion.span>
             </div>
           )}
@@ -157,7 +158,7 @@ export default function LivePresence() {
               className="text-xs text-[#F0EDE6]/80 leading-relaxed"
               style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
             >
-              {online ? (
+              {isOnline ? (
                 <>
                   Currently available
                   <span className="inline-block -rotate-32 text-lg">🤞</span>
