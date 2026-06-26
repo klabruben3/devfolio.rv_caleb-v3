@@ -1,9 +1,12 @@
+"use client";
 import { projects, statusStyles } from "@/data";
 import { useState } from "react";
 
 export default function Projects() {
   const [active, setActive] = useState<string>(projects[0].id);
   const project = projects.find((p) => p.id === active)!;
+
+  console.log(project)
 
   return (
     <section id="projects" className="py-24 px-8 md:px-16">

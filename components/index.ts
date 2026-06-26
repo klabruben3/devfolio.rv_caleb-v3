@@ -4,6 +4,7 @@ export { default as Nav } from "./features/Nav";
 export { default as EcosystemMap } from "./features/EcosystemMap";
 export { default as Footer } from "./features/Footer";
 export { default as ConnectionStatus } from "./features/ConnectionStatus";
+export { default as Authentication } from "./features/Authentication";
 
 // Layout
 export { default as Intro } from "./layout/Intro";
@@ -17,6 +18,8 @@ export { default as CurrentSection } from "./layout/CurrentSection";
 
 // ui
 export { default as Button } from "./ui/Button";
+export { default as usePointerReveal } from "./ui/PointerReveal";
+export { default as ChatButton } from "./ui/ChatButton";
 
 // utils
 export { default as GlobalStyles } from "./utils/GlobalStyles";

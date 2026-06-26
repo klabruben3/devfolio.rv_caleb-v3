@@ -1,9 +1,6 @@
 import { timelineNodes, typeStyles } from "@/data";
-import { useRef } from "react";
 
 export default function WorkshopTimeline() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
   return (
     <section id="timeline" className="py-24 px-8 md:px-16">
       <div className="flex items-baseline gap-6 mb-16">
@@ -38,7 +35,6 @@ export default function WorkshopTimeline() {
       </div>
 
       <div
-        ref={scrollRef}
         className="overflow-x-auto pb-4"
         style={{ scrollbarWidth: "none" }}
       >

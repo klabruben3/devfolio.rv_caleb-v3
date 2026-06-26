@@ -13,3 +13,8 @@ export interface SectionProp {
   section: Section;
   setSection: Dispatch<SetStateAction<Section>>;
 }
+
+export interface AuthProp {
+  isAdminAuth: boolean;
+  setIsAdminAuth: Dispatch<SetStateAction<boolean>>;
+}

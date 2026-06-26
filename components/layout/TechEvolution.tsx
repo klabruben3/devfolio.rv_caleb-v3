@@ -1,3 +1,4 @@
+"use client";
 import { techs } from "@/data";
 import { useState } from "react";
 

@@ -1,3 +1,4 @@
+"use client";
 import { type Section, useSectionContext } from "@/context";
 import { AnimatePresence, motion } from "motion/react";
 import {
@@ -79,7 +80,7 @@ export default function Nav() {
       <nav
         className="bg-card rounded-full px-2 py-2 border border-border overflow-hidden"
         aria-label="Visible Navigation"
-      >
+        >
         <ul className="flex items-center gap-1">
           <AnimatePresence>
             {navItemsRef.current.slice(0, visibleCount).map((item, i) => {
@@ -109,7 +110,7 @@ export default function Nav() {
                           bounce: 0.2,
                           duration: 0.6,
                         }}
-                      />
+                        />
                     )}
                     <Icon className="w-4 h-4 relative z-10" />
                     <span

@@ -1,3 +1,4 @@
+"use client";
 import { ideas, statusStyles } from "@/data";
 import { useState } from "react";
 

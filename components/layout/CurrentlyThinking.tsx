@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import EcosystemMap from "../features/EcosystemMap";
 import { thinkingCards, typeStyles } from "@/data";

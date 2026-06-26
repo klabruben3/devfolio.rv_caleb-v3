@@ -15,13 +15,13 @@ export default function CurrentSection() {
   const { section } = useSectionContext();
 
   const pages = {
-    intro: Intro,
-    thinking: CurrentlyThinking,
-    timeline: WorkshopTimeline,
-    projects: Projects,
-    ideas: IdeaVault,
-    technologies: TechEvolution,
-    notebook: Notebook,
+    intro: Intro, // Server
+    thinking: CurrentlyThinking, // Client
+    timeline: WorkshopTimeline, // Server
+    projects: Projects, // Client
+    ideas: IdeaVault, // Client
+    technologies: TechEvolution, // Client
+    notebook: Notebook, // Server
   };
 
   const Page = pages[section];
