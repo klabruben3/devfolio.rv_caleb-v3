@@ -1,6 +1,6 @@
 import {
-  ChatButton,
   Authentication,
+  ChatInstance,
   ConnectionStatus,
   CurrentSection,
   Footer,
@@ -26,12 +26,7 @@ export default function Home() {
           <main>
             <CurrentSection />
           </main>
-          <ChatButton
-            renderType="client"
-            isAdminOnline={true}
-            newMessage={true}
-            typing={false}
-          />
+          <ChatInstance />
         </SectionContextProvider>
         <Footer />
       </AuthProvider>

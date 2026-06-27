@@ -1,11 +1,18 @@
 "use client";
 
-import type { ComponentType } from "react";
+import {
+  useRef,
+  type ComponentType,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import {
   MessageSquareDashed,
+  MessageSquareDashedIcon,
   MessageSquareDot,
   MessageSquareMore,
   MessageSquarePlus,
+  MessageSquareText,
 } from "lucide-react";
 
 interface ChatButtonProps {
@@ -13,6 +20,7 @@ interface ChatButtonProps {
   newMessage: boolean;
   isAdminOnline: boolean;
   typing: boolean;
+  action: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function ChatButton({
@@ -20,40 +28,47 @@ export default function ChatButton({
   newMessage,
   isAdminOnline,
   typing,
+  action,
 }: ChatButtonProps) {
+  let Icon: ComponentType<{ className?: string }>;
+  let variant: Variant;
+
+  // Lowest priority (default)
   if (renderType === "admin") {
-    if (typing) {
-      return <ChatLayout Icon={MessageSquareMore} variant="typing" />;
-    }
-
-    if (newMessage) {
-      return <ChatLayout Icon={MessageSquareDot} variant="new-message" />;
-    }
-
-    return null;
+    Icon = MessageSquareDashedIcon;
+    variant = "offline";
+  } else if (isAdminOnline) {
+    Icon = MessageSquarePlus;
+    variant = "online";
+  } else {
+    Icon = MessageSquareDashed;
+    variant = "offline";
   }
 
-  if (typing) {
-    return <ChatLayout Icon={MessageSquareMore} variant="typing" />;
-  }
-
+  // Override if there's a new message
   if (newMessage) {
-    return <ChatLayout Icon={MessageSquareDot} variant="new-message" />;
+    Icon = MessageSquareText;
+    variant = "new-message";
   }
 
-  if (isAdminOnline) {
-    return <ChatLayout Icon={MessageSquarePlus} variant="online" />;
+  // Highest priority
+  if (typing) {
+    Icon = MessageSquareMore;
+    variant = "typing";
   }
 
-  return <ChatLayout Icon={MessageSquareDashed} variant="offline" />;
+  return <ChatLayout Icon={Icon} variant={variant} action={action} />;
 }
+
+type Variant = "online" | "offline" | "new-message" | "typing";
 
 interface ChatLayoutProps {
   Icon: ComponentType<{ className?: string }>;
-  variant: "online" | "offline" | "new-message" | "typing";
+  variant: Variant;
+  action: Dispatch<SetStateAction<boolean>>;
 }
 
-function ChatLayout({ Icon, variant }: ChatLayoutProps) {
+function ChatLayout({ Icon, variant, action: setShowChat }: ChatLayoutProps) {
   const styles = {
     online: {
       icon: "text-accent",
@@ -115,6 +130,7 @@ function ChatLayout({ Icon, variant }: ChatLayoutProps) {
         type="button"
         aria-label={current.label}
         title={current.label}
+        onClick={() => setShowChat(true)}
         className={[
           "group relative grid h-13 w-13 place-items-center",
           "rounded-xl",
