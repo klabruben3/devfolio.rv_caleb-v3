@@ -90,7 +90,7 @@ function LoginCard({
             </h1>
           </div>
 
-          <form className="space-y-5" onSubmit={handleSubmit}>
+          <form id="login" aria-label="login" className="space-y-5" onSubmit={handleSubmit}>
             <div className="space-y-2">
               <label htmlFor="email">Email address</label>
 

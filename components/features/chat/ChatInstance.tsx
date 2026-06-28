@@ -2,27 +2,33 @@
 import { useAuthContext } from "@/context";
 import ChatButton from "./ChatButton";
 import AdminChat from "./admin/AdminChat";
-import VisitorChat from "./visitor/VisitorChat";
+import VisitorConsole from "./visitor/VisitorConsole";
 import { useState } from "react";
+import { VisitorScreen } from "./visitor/types";
 
 export default function ChatInstance() {
   const { isAuth, isOnline } = useAuthContext();
-  const [showChat, setShowChat] = useState(false);
+  const [showConsole, setShowConsole] = useState(false);
+  const [screen, setScreen] = useState<VisitorScreen>("setup");
 
   return (
     <>
-      {!showChat ? (
+      {!showConsole ? (
         <ChatButton
           isAdminOnline={isOnline}
           renderType="admin"
           newMessage={false}
           typing={false}
-          action={setShowChat}
+          action={setShowConsole}
         />
       ) : isAuth ? (
-        <AdminChat />
+        <AdminChat action={setShowConsole} />
       ) : (
-        <VisitorChat />
+        <VisitorConsole
+          setShowConsole={setShowConsole}
+          setScreen={setScreen}
+          screen={screen}
+        />
       )}
     </>
   );

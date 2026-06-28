@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  useRef,
   type ComponentType,
   type Dispatch,
   type SetStateAction,
@@ -9,14 +8,13 @@ import {
 import {
   MessageSquareDashed,
   MessageSquareDashedIcon,
-  MessageSquareDot,
   MessageSquareMore,
   MessageSquarePlus,
   MessageSquareText,
 } from "lucide-react";
 
 interface ChatButtonProps {
-  renderType: "admin" | "client";
+  renderType: "admin" | "visitor";
   newMessage: boolean;
   isAdminOnline: boolean;
   typing: boolean;
