@@ -2,12 +2,20 @@
 
 import MessageBlock from "@/components/ui/MessageBlock";
 import { Message } from "@/components/ui/types";
+import { useAuthContext } from "@/context";
+import { useLenis } from "lenis/react";
 import { Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import UpdateDetails from "./visitor/UpdateDetails";
+import MyContactDetails from "./visitor/MyContactDetails";
 
 export default function ChatMessageScreen() {
   const [draft, setDraft] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
+  const { isOnline, isAuth } = useAuthContext();
+  const [hoveringChat, setHoveringChat] = useState(false);
+  const [showContactInfo, setShowContactInfo] = useState(false);
+  const [showUpdateCard, setShowUpdateCard] = useState(false);
 
   const messages: Message[] = [];
   const handleSend = () => {
@@ -17,16 +25,80 @@ export default function ChatMessageScreen() {
     }
   };
 
+  const handleUserDetails = () => {
+    setShowUpdateCard(true);
+  };
+
+  const handleShowContacts = () => {
+    setShowContactInfo(true);
+  };
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Stops Lenis from running upon mouse enter
+  const lenis = useLenis();
+  useEffect(() => {
+    if (hoveringChat) lenis?.stop();
+    else lenis?.start();
+  }, [hoveringChat]);
+
   return (
     <>
       <div
-        className="flex-1 overflow-y-auto px-4 pt-4 relative"
+        className="flex-1 overflow-y-auto px-4 pt-4 relative max-h-[250px] min-h-[200px]"
+        onMouseEnter={() => setHoveringChat(true)}
+        onMouseLeave={() => setHoveringChat(false)}
+        onWheel={(e) => e.stopPropagation()}
         style={{ scrollbarWidth: "none" }}
       >
+        {showUpdateCard && (
+          <UpdateDetails onCancel={() => setShowUpdateCard(false)} />
+        )}
+
+        {showContactInfo && (
+          <MyContactDetails onCancel={() => setShowContactInfo(false)} />
+        )}
+        <div className="flex items-center flex-col">
+          <p
+            className="mb-4 text-center rounded-xl px-3 py-2 max-w-[80%] text-white/60"
+            style={{
+              fontFamily: "JetBrains Mono",
+              fontSize: "9px",
+              letterSpacing: "0.1em",
+            }}
+          >
+            {!isOnline && !isAuth && (
+              <>
+                Ruben is not online right now.
+                <br />
+                Leave a message and he'll get back to you.
+                <br />
+                <span
+                  onClick={handleUserDetails}
+                  className="text-[#e9b44c] underline leading-[5px] underline-offset-2 text-[10px] cursor-pointer"
+                >
+                  Add your contact details
+                </span>{" "}
+                or{" "}
+                <span
+                  onClick={handleShowContacts}
+                  className="text-[#e9b44c] underline leading-[5px] underline-offset-2 text-[10px] cursor-pointer"
+                >
+                  contact him directly.
+                </span>
+              </>
+            )}
+
+            {isOnline && (
+              <span className="text-[#7ca982]">
+                Average response under 5 minutes...
+              </span>
+            )}
+          </p>
+        </div>
+
         {messages.map((msg) => (
           <MessageBlock key={msg.id} msg={msg} />
         ))}
@@ -43,8 +115,8 @@ export default function ChatMessageScreen() {
       >
         <div className="flex gap-2 items-end">
           <textarea
-          id="message"
-          aria-label="Message"
+            id="message"
+            aria-label="Message"
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             onKeyDown={(e) => {

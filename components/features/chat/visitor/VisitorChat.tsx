@@ -1,5 +1,4 @@
 "use client";
-import GrainOverlay from "@/components/utils/GrainOverlay";
 import { useAuthContext } from "@/context";
 import { X } from "lucide-react";
 import ChatMessageScreen from "../ChatMessageScreen";
@@ -22,8 +21,6 @@ export default function VisitorChat({ onClose }: VisitorChatProp) {
         boxShadow: "0 16px 48px rgba(0,0,0,0.7)",
       }}
     >
-      <GrainOverlay />
-
       {/* Header */}
       <div
         className="flex items-center justify-between px-4 py-3 relative"
@@ -49,7 +46,7 @@ export default function VisitorChat({ onClose }: VisitorChatProp) {
                 fontWeight: 500,
               }}
             >
-              Chatting with Caleb
+               {isOnline ? "Chatting with Caleb" : "Try leaving a message..."}
             </div>
             <div
               style={{
@@ -73,13 +70,13 @@ export default function VisitorChat({ onClose }: VisitorChatProp) {
                 opacity: 0.6,
                 position: "absolute",
                 top: "6px",
-                left: "50%",
+                left: "55%",
                 transform: "translate(-30%, 2px)",
               }}
               className="flex"
             >
               <span>↙</span>
-              <span className="rotate-5">he's thinking about life</span>
+              <span className="rotate-5">thinking about life</span>
             </span>
           )}
           <button

@@ -1,5 +1,4 @@
 "use client";
-import GrainOverlay from "@/components/utils/GrainOverlay";
 import { Check } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -33,8 +32,6 @@ export default function SetupCard({
         boxShadow: "0 16px 48px rgba(0,0,0,0.6)",
       }}
     >
-      <GrainOverlay />
-
       <div className="px-6 pt-6 pb-5">
         {/* Eyebrow */}
         <div
