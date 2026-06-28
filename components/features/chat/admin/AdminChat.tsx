@@ -1,18 +1,26 @@
 "use client";
 
 import { Dispatch, SetStateAction, useState } from "react";
+import { Radio, X } from "lucide-react";
+import Chats from "./Chats";
+import ChatMessageScreen from "../ChatMessageScreen";
+import { useAuthContext } from "@/context";
+import AvailabilityToggle from "./AvailabilityToggle";
+import { setOnlineStatus } from "./actions";
 
 interface AdminChatProp {
   action: Dispatch<SetStateAction<boolean>>;
 }
 
-import { Radio, X } from "lucide-react";
-import Chats from "./Chats";
-import ChatMessageScreen from "../ChatMessageScreen";
-
 export default function AdminChat({ action: setShowConsole }: AdminChatProp) {
   const [hasChats, setHasChat] = useState(false);
   const [showChat, setShowChat] = useState(false);
+  const { isOnline } = useAuthContext();
+
+  const handleToggle = () => {
+    setOnlineStatus(!isOnline);
+  };
+
   return (
     <div
       className="fixed bottom-5 right-5 z-50 border border-white/10 flex flex-col overflow-hidden"
@@ -62,6 +70,16 @@ export default function AdminChat({ action: setShowConsole }: AdminChatProp) {
             <X size={14} color="#f0ede6" />
           </button>
         </div>
+      </div>
+
+      <div
+        className="px-5 py-3"
+        style={{
+          borderBottom: "1px solid rgba(240,237,230,0.06)",
+          flexShrink: 0,
+        }}
+      >
+        <AvailabilityToggle isOnline={isOnline} onToggle={handleToggle} />
       </div>
 
       {!hasChats ? (
