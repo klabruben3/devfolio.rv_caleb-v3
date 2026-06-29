@@ -13,10 +13,13 @@ export default function SetupCard({
 }) {
   const [name, setName] = useState("");
   const [agreed, setAgreed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { initialize } = useVisitorContext();
 
   const handleSubmit = async () => {
+    setIsSubmitting(true);
+
     // 1. Sign in anonymously
     const { data: authData, error: authError } =
       await supabase.auth.signInAnonymously();
@@ -49,6 +52,8 @@ export default function SetupCard({
       return;
     }
     await initialize(); // fetches chatId into context
+
+    setIsSubmitting(false);
     setScreen();
   };
 
@@ -214,20 +219,27 @@ export default function SetupCard({
         {/* Buttons */}
         <button
           onClick={() => name.trim() && agreed && handleSubmit()}
-          disabled={!name.trim() || !agreed}
+          disabled={!name.trim() || !agreed || isSubmitting}
           className="w-full py-2.5 mb-2 transition-opacity"
           style={{
-            background: name.trim() && agreed ? "#e9b44c" : "#2a2a20",
+            background:
+              name.trim() && agreed && !isSubmitting
+                ? "#e9b54c"
+                : "#e9b54ca0",
             borderRadius: "2px",
             border: "none",
-            cursor: name.trim() && agreed ? "pointer" : "not-allowed",
+            cursor:
+              name.trim() && agreed && !isSubmitting
+                ? "pointer"
+                : "not-allowed",
             fontFamily: "Plus Jakarta Sans",
             fontSize: "13px",
             fontWeight: 600,
-            color: name.trim() && agreed ? "#0d0d0b" : "#3a3a30",
+            color:
+              name.trim() && agreed && !isSubmitting ? "#0d0d0b" : "#3a3a30",
           }}
         >
-          Start a chat
+          {isSubmitting ? "Analysing..." : "Start a chat"}
         </button>
         <button
           onClick={onCancel}
@@ -243,33 +255,6 @@ export default function SetupCard({
         >
           Not now
         </button>
-
-        {/* Footer mono labels */}
-        <div
-          className="flex justify-between items-center mt-4 pt-4"
-          style={{ borderTop: "1px solid rgba(240,237,230,0.06)" }}
-        >
-          <span
-            style={{
-              fontFamily: "JetBrains Mono",
-              fontSize: "8px",
-              color: "#3a3a30",
-              letterSpacing: "0.1em",
-            }}
-          >
-            messages are not saved permanently
-          </span>
-          <span
-            style={{
-              fontFamily: "JetBrains Mono",
-              fontSize: "8px",
-              color: "#3a3a30",
-              letterSpacing: "0.1em",
-            }}
-          >
-            room: preparing…
-          </span>
-        </div>
       </div>
     </div>
   );

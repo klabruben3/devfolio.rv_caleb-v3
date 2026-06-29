@@ -76,7 +76,7 @@ export default function VisitorChat({ onClose }: VisitorChatProp) {
               className="flex"
             >
               <span>↙</span>
-              <span className="rotate-5">thinking about life</span>
+              <span className="rotate-5">he'll get back to you</span>
             </span>
           )}
           <button
