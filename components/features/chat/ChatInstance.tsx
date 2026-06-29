@@ -1,5 +1,5 @@
 "use client";
-import { useAuthContext } from "@/context";
+import { useAuthContext, useVisitorContext } from "@/context";
 import ChatButton from "./ChatButton";
 import AdminChat from "./admin/AdminChat";
 import VisitorConsole from "./visitor/VisitorConsole";
@@ -11,15 +11,20 @@ export default function ChatInstance() {
   const { isAuth, isOnline } = useAuthContext();
   const [showConsole, setShowConsole] = useState(false);
   const [screen, setScreen] = useState<VisitorScreen>("setup");
-
+  const { chatId } = useVisitorContext();
   const isAuthRef = useRef(isAuth);
-  useEffect(() => {
-    isAuthRef.current = isAuth;
-  }, [isAuth]);
 
   const handleUnload = () => {
     if (isAuthRef.current) setOnlineStatus(false);
   };
+
+  useEffect(() => {
+    isAuthRef.current = isAuth;
+  }, [isAuth]);
+
+  useEffect(() => {
+    if (chatId) setScreen("active");
+  }, [chatId]);
 
   useEffect(() => {
     window.addEventListener("beforeunload", handleUnload);

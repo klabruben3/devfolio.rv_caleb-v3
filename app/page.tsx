@@ -8,7 +8,7 @@ import {
   LivePresence,
   Nav,
 } from "@/components";
-import { AuthProvider, SectionContextProvider } from "@/context";
+import { AuthProvider, SectionContextProvider, VisitorProvider } from "@/context";
 
 export default function Home() {
   return (
@@ -16,20 +16,22 @@ export default function Home() {
       className="bg-[#0D0D0B] min-h-screen text-[#F0EDE6]"
       style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
     >
-      <AuthProvider>
-        <SectionContextProvider>
-          <GlobalStyles />
-          <LivePresence />
-          <Authentication />
-          <Nav />
-          <ConnectionStatus />
-          <main>
-            <CurrentSection />
-          </main>
-          <ChatInstance />
-        </SectionContextProvider>
-        <Footer />
-      </AuthProvider>
+      <VisitorProvider>
+        <AuthProvider>
+          <SectionContextProvider>
+            <GlobalStyles />
+            <LivePresence />
+            <Authentication />
+            <Nav />
+            <ConnectionStatus />
+            <main>
+              <CurrentSection />
+            </main>
+            <ChatInstance />
+          </SectionContextProvider>
+          <Footer />
+        </AuthProvider>
+      </VisitorProvider>
     </div>
   );
 }

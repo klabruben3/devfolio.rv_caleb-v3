@@ -22,13 +22,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     async function initialize() {
-      // Load authenticated user
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      setUser(user);
-
       // Load current admin presence
       const { data } = await supabase
         .from("Presence")
@@ -40,6 +33,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setIsOnline(data.is_online);
         setLastSeen(relativeTime(data.updated_at));
       }
+
+      // loads the user and makess sure its admin
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user || user.is_anonymous !== false) return;
+      setUser(user);
     }
 
     initialize();
@@ -48,7 +48,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+      const u = session?.user ?? null;
+      // Only set user if it's the admin (not anonymous)
+      if (u && u.is_anonymous === false) {
+        setUser(u);
+      } else {
+        setUser(null);
+      }
     });
 
     // Listen for admin presence changes
@@ -79,7 +85,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       value={{
         isAuth,
         isOnline,
-        lastSeen
+        lastSeen,
       }}
     >
       {children}

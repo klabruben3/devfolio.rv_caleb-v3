@@ -1,4 +1,6 @@
 "use client";
+import { useVisitorContext } from "@/context";
+import { supabase } from "@/lib/supabase/client";
 import { Check } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -12,10 +14,42 @@ export default function SetupCard({
   const [name, setName] = useState("");
   const [agreed, setAgreed] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { initialize } = useVisitorContext();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    // 1. Sign in anonymously
+    const { data: authData, error: authError } =
+      await supabase.auth.signInAnonymously();
+    if (authError || !authData.user) {
+      console.error("Auth error:", authError);
+      return;
+    }
+
+    // 2. Create chat
+    const { data: chat, error: chatError } = await supabase
+      .from("chats")
+      .insert({ visitor: name.trim() })
+      .select("id")
+      .single();
+
+    if (chatError || !chat) {
+      console.error("Chat error:", chatError);
+      return;
+    }
+
+    // 3. Link visitor to chat
+    const { error: visitorError } = await supabase.from("visitors").insert({
+      auth_id: authData.user.id,
+      chat_id: chat.id,
+      name: name.trim(),
+    });
+
+    if (visitorError) {
+      console.error("Visitor error:", visitorError);
+      return;
+    }
+    await initialize(); // fetches chatId into context
     setScreen();
-    console.log("supabase: i have submitted");
   };
 
   useEffect(() => {

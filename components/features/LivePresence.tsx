@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "../";
-import { useAuthContext } from "@/context";
+import { useAuthContext, useVisitorContext } from "@/context";
 const tooltipVariants = {
   hidden: {
     y: -200,
@@ -40,7 +40,8 @@ export default function LivePresence() {
   const [extend, setExtend] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [showLastSeen, setShowLastSeen] = useState(false);
-  const { isOnline, lastSeen } = useAuthContext();
+  const { isAuth, isOnline, lastSeen } = useAuthContext();
+  const { chatId } = useVisitorContext();
 
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -94,12 +95,15 @@ export default function LivePresence() {
   }, []);
 
   useEffect(() => {
+    if (isAuth || !chatId) return;
+
     setShowLastSeen(true);
     lastSTimeoutRef.current = setTimeout(() => setShowLastSeen(false), 5000);
+
     return () => {
       if (lastSTimeoutRef.current) clearTimeout(lastSTimeoutRef.current);
     };
-  }, [isOnline]);
+  }, [isOnline, isAuth, chatId]);
 
   return (
     <div className="fixed top-5 left-5 w-fit z-50 flex flex-col gap-2">
