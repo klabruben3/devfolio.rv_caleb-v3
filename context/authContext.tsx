@@ -3,10 +3,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase/client";
+import { relativeTime } from "@/components/features/chat/actions";
 
 type AuthContextType = {
   isAuth: boolean;
   isOnline: boolean;
+  lastSeen: string;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -14,6 +16,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isOnline, setIsOnline] = useState(false);
+  const [lastSeen, setLastSeen] = useState("");
 
   const isAuth = !!user;
 
@@ -29,12 +32,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Load current admin presence
       const { data } = await supabase
         .from("Presence")
-        .select("is_online")
+        .select("is_online, updated_at")
         .eq("id", "admin")
         .single();
 
       if (data) {
         setIsOnline(data.is_online);
+        setLastSeen(relativeTime(data.updated_at));
       }
     }
 
@@ -59,6 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         },
         (payload) => {
           setIsOnline(payload.new.is_online);
+          setLastSeen(relativeTime(payload.new.updated_at));
         },
       )
       .subscribe();
@@ -74,6 +79,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       value={{
         isAuth,
         isOnline,
+        lastSeen
       }}
     >
       {children}

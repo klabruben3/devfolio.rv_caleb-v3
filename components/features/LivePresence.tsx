@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "../";
 import { useAuthContext } from "@/context";
-
 const tooltipVariants = {
   hidden: {
     y: -200,
@@ -12,7 +11,6 @@ const tooltipVariants = {
     opacity: 0,
   },
   visible: {
-    x: 0,
     y: 0,
     rotate: 0,
     opacity: 1,
@@ -24,14 +22,29 @@ const tooltipVariants = {
   },
 };
 
+const lastSeenVariants = {
+  hidden: {
+    y: -100,
+    rotate: 30,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    rotate: 0,
+    opacity: 1,
+  },
+};
+
 export default function LivePresence() {
   const [hovered, setHovered] = useState(false);
   const [extend, setExtend] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-  const { isOnline } = useAuthContext();
+  const [showLastSeen, setShowLastSeen] = useState(false);
+  const { isOnline, lastSeen } = useAuthContext();
 
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastSTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const showStatusText = isDesktop || extend;
 
   // Handle mouse movements
@@ -80,6 +93,14 @@ export default function LivePresence() {
     };
   }, []);
 
+  useEffect(() => {
+    setShowLastSeen(true);
+    lastSTimeoutRef.current = setTimeout(() => setShowLastSeen(false), 5000);
+    return () => {
+      if (lastSTimeoutRef.current) clearTimeout(lastSTimeoutRef.current);
+    };
+  }, [isOnline]);
+
   return (
     <div className="fixed top-5 left-5 w-fit z-50 flex flex-col gap-2">
       <Button
@@ -106,7 +127,7 @@ export default function LivePresence() {
             }, 3000);
           }
         }}
-        className="flex items-center bg-card px-5 w-fit h-[50px] rounded-full border-2 border-border z-1 active:scale-90 transition-transform duration-250"
+        className="flex relative items-center bg-card px-5 w-fit h-[50px] rounded-full border-2 border-border z-1 active:scale-90 transition-transform duration-250"
       >
         <div className="relative flex items-center">
           <span
@@ -136,6 +157,32 @@ export default function LivePresence() {
                 {isOnline ? "Online" : "Offline"}
               </motion.span>
             </div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {showLastSeen && (
+            <motion.span
+              variants={lastSeenVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              transition={{
+                opacity: { duration: 0.2 },
+                rotate: { type: "spring", damping: 20, stiffness: 300 },
+                y: { type: "spring", damping: 20, stiffness: 300 },
+              }}
+              style={{
+                fontFamily: "Caveat",
+                fontSize: "16px",
+                color: "#e9b44c",
+                opacity: 0.6,
+                position: "absolute",
+              }}
+              className="flex left-full -top-4 truncate"
+            >
+              <span>↙</span>
+              <span className="rotate-15">{lastSeen}</span>
+            </motion.span>
           )}
         </AnimatePresence>
       </Button>
