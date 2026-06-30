@@ -26,7 +26,7 @@ export default function AuthBtn() {
       {!showLogin && (
         <button
           onClick={currentAction}
-          className={`absolute right-[500px] top-[300px] z-50 h-[50px] w-[50px] rounded-full border-2 ${isAuth ? "border-gray-500" : "border-primary"} bg-primary`}
+          className={`relative -right-[130px] -top-[40px] h-[50px] w-[50px] rounded-full border-2 ${isAuth ? "border-gray-500" : "border-primary"} bg-primary`}
         />
       )}
     </>
