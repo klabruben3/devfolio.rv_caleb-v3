@@ -1,6 +1,8 @@
 "use client";
 
 import FloatingWindow from "@/components/ui/FloatingWindow";
+import { useVisitorContext } from "@/context";
+import { supabase } from "@/lib/supabase/client";
 import { Check } from "lucide-react";
 import { useState } from "react";
 
@@ -16,9 +18,29 @@ function ContactDetailsCard({ onCancel }: { onCancel: () => void }) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [whatsapp, setWhatsapp] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { chatId } = useVisitorContext();
 
-  const handleUpdate = () => {
-    console.log("Supabase: updating visitor details");
+  const handleUpdate = async () => {
+    setIsSubmitting(true);
+
+    const { error } = await supabase
+      .from("visitors")
+      .update({
+        email: email || null,
+        phone: phone || null,
+        whatsapp: whatsapp,
+      })
+      .eq("chat_id", chatId);
+
+    setIsSubmitting(false);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    onCancel();
   };
 
   return (
@@ -162,18 +184,24 @@ function ContactDetailsCard({ onCancel }: { onCancel: () => void }) {
 
         <button
           onClick={handleUpdate}
-          disabled={!email.trim() && !phone.trim()}
+          disabled={!email.trim() && !phone.trim() && isSubmitting}
           className="px-4 py-2"
           style={{
-            background: email.trim() || phone.trim() ? "#e9b44c" : "#2a2a20",
+            background:
+              email.trim() || phone.trim() || !isSubmitting
+                ? "#e9b44c"
+                : "#2a2a20",
             color: "#0d0d0b",
             borderRadius: "2px",
             fontFamily: "JetBrains Mono",
             fontSize: "10px",
-            cursor: email.trim() || phone.trim() ? "pointer" : "not-allowed",
+            cursor:
+              email.trim() || phone.trim() || !isSubmitting
+                ? "pointer"
+                : "not-allowed",
           }}
         >
-          SEND
+          {!isSubmitting ? "SEND" : "SENDING..."}
         </button>
       </div>
     </div>

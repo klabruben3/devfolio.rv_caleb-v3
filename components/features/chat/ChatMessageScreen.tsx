@@ -79,7 +79,7 @@ export default function ChatMessageScreen() {
                   onClick={handleUserDetails}
                   className="text-[#e9b44c] underline leading-[5px] underline-offset-2 text-[10px] cursor-pointer"
                 >
-                  Add your contact details
+                  Add/update your contact details
                 </span>{" "}
                 or{" "}
                 <span
