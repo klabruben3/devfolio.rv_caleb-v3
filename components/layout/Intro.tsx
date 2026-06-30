@@ -3,18 +3,6 @@ import SignOut from "../ui/SignOut";
 export default function Intro() {
   return (
     <section className="mt-18 flex flex-col justify-end pb-20 px-8 md:px-16 relative overflow-hidden">
-      <div className="fixed top-36 right-4 md:right-16 opacity-40">
-        <span
-          className="text-[11px] tracking-widest uppercase text-[#7A7A6A]"
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            writingMode: "vertical-rl",
-          }}
-        >
-          Living Workshop · Est. 2022
-        </span>
-      </div>
-
       <div className="max-w-5xl">
         <div className="mb-6 flex items-center gap-3">
           <div className="w-8 h-px bg-[#E9B44C]/60" />
@@ -35,8 +23,11 @@ export default function Intro() {
         >
           Making
           <br />
-          ideas <em className="text-[#E9B44C]">real</em>
-          <SignOut />
+          ideas{" "}
+          <em className="text-[#E9B44C] relative">
+            real
+            <SignOut />
+          </em>
           <br />
           enough to argue with.
         </h1>

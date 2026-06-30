@@ -5,6 +5,7 @@ export { default as EcosystemMap } from "./features/EcosystemMap";
 export { default as Footer } from "./features/Footer";
 export { default as ConnectionStatus } from "./features/ConnectionStatus";
 export { default as ChatInstance } from "./features/chat/ChatInstance";
+export { default as FixedContent } from "./features/FixedContent";
 
 // Layout
 export { default as Intro } from "./layout/Intro";

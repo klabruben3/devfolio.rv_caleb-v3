@@ -15,7 +15,7 @@ export default function CurrentSection() {
   const { section } = useSectionContext();
 
   const pages = {
-    intro: Intro, // Server
+    intro: Intro, // Client
     thinking: CurrentlyThinking, // Client
     timeline: WorkshopTimeline, // Server
     projects: Projects, // Client

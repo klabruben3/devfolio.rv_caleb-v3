@@ -23,7 +23,7 @@ export default function SignOut() {
           onClick={() => {
             if (isAuth) handleSignOut();
           }}
-          className={`relative -right-[130px] -top-[40px] h-[50px] w-[50px] rounded-full border-2 ${isAuth ? "border-gray-500" : "border-primary"} bg-primary`}
+          className={`absolute left-full bottom-1/2 -translate-y-5 translate-x-10 h-[50px] w-[50px] rounded-full border-2 ${isAuth ? "border-gray-500" : "border-primary"} bg-primary`}
         />
       )}
     </>

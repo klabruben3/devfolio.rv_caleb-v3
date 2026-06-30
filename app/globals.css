@@ -177,6 +177,10 @@
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
   }
+  
+  *, *::after, *::before {
+    user-select: none;
+  }
 
   input {
     font-size: var(--text-base);

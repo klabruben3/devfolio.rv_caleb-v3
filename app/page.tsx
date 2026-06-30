@@ -2,6 +2,7 @@ import {
   ChatInstance,
   ConnectionStatus,
   CurrentSection,
+  FixedContent,
   Footer,
   GlobalStyles,
   LivePresence,
@@ -25,6 +26,9 @@ export default function Home() {
         <AuthProvider>
           <SectionContextProvider>
             <GlobalStyles />
+
+            {/* Background Features */}
+            <FixedContent />
 
             {/* Fixed header */}
             <LoginContextProvider>
