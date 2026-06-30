@@ -1,5 +1,5 @@
 "use client";
-import { useLoginContext } from "@/context";
+import { useLoginContext, usePinContext } from "@/context";
 import { supabase } from "@/lib/supabase/client";
 import { Eye, EyeOff, LockKeyhole, Mail, X } from "lucide-react";
 import { useState } from "react";
@@ -9,6 +9,12 @@ export default function LoginCard() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { setShowLogin } = useLoginContext();
+  const { setPin } = usePinContext();
+
+  const handleClose = () =>{
+    setShowLogin(false);
+    setPin("");
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -64,7 +70,7 @@ export default function LoginCard() {
         {/* Escape Hatch / Close Button */}
         <button
           type="button"
-          onClick={() => setShowLogin(false)}
+          onClick={handleClose}
           className="opacity-45 hover:opacity-80 transition-opacity cursor-pointer bg-transparent border-none"
           aria-label="Close login panel"
         >

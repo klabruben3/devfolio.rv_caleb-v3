@@ -10,6 +10,7 @@ import {
 import {
   AuthProvider,
   LoginContextProvider,
+  PinContextProvider,
   SectionContextProvider,
   VisitorProvider,
 } from "@/context";
@@ -26,16 +27,20 @@ export default function Home() {
             <GlobalStyles />
 
             {/* Fixed header */}
-            <LivePresence />
-            <Nav />
-
-            {/* Upon offline */}
-            <ConnectionStatus />
             <LoginContextProvider>
+              <PinContextProvider>
+                <LivePresence />
+
+                <Nav />
+
+                <ChatInstance />
+              </PinContextProvider>
+
+              {/* Upon offline */}
+              <ConnectionStatus />
               <main>
                 <CurrentSection />
               </main>
-              <ChatInstance />
             </LoginContextProvider>
           </SectionContextProvider>
           <Footer />

@@ -1,4 +1,4 @@
-import AuthBtn from "../ui/AuthBtn";
+import SignOut from "../ui/SignOut";
 
 export default function Intro() {
   return (
@@ -36,7 +36,7 @@ export default function Intro() {
           Making
           <br />
           ideas <em className="text-[#E9B44C]">real</em>
-          <AuthBtn />
+          <SignOut />
           <br />
           enough to argue with.
         </h1>

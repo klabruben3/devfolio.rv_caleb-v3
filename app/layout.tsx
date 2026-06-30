@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScroll from "@/components/utils/SmoothScroll";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://devfolio-rv-caleb-v3.vercel.app"),
@@ -54,6 +55,7 @@ export const metadata: Metadata = {
   ],
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -63,6 +65,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-full flex flex-col">
         <SmoothScroll>{children}</SmoothScroll>
+        <Analytics/>
       </body>
     </html>
   );

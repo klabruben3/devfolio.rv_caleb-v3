@@ -3,7 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "../";
-import { useAuthContext, useVisitorContext } from "@/context";
+import {
+  useAuthContext,
+  useLoginContext,
+  usePinContext,
+  useVisitorContext,
+} from "@/context";
+import { requestLogin } from "./action";
 const tooltipVariants = {
   hidden: {
     y: -200,
@@ -42,6 +48,8 @@ export default function LivePresence() {
   const [showLastSeen, setShowLastSeen] = useState(false);
   const { isAuth, isOnline, lastSeen } = useAuthContext();
   const { chatId } = useVisitorContext();
+  const { setShowLogin } = useLoginContext();
+  const { pin } = usePinContext();
 
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -69,6 +77,13 @@ export default function LivePresence() {
       timeoutRef.current = null;
     }, 100);
   }; //
+
+  const handleRequestLogin = async () => {
+    if (!pin) return;
+    const result = await requestLogin(pin);
+
+    if(result === "Success") setShowLogin(true)
+  };
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
@@ -131,6 +146,7 @@ export default function LivePresence() {
             }, 3000);
           }
         }}
+        onClick={handleRequestLogin}
         className="flex relative items-center bg-card px-5 w-fit h-[50px] rounded-full border-2 border-border z-1 active:scale-90 transition-transform duration-250"
       >
         <div className="relative flex items-center">

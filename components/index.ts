@@ -18,7 +18,7 @@ export { default as CurrentSection } from "./layout/CurrentSection";
 
 // ui
 export { default as Button } from "./ui/Button";
-export { default as AuthBtn } from "./ui/AuthBtn";
+export { default as SignOut } from "./ui/SignOut";
 export { default as usePointerReveal } from "./ui/PointerReveal";
 
 // utils
