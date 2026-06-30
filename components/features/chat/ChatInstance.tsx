@@ -1,17 +1,19 @@
 "use client";
-import { useAuthContext, useVisitorContext } from "@/context";
+import { useAuthContext, useLoginContext, useVisitorContext } from "@/context";
 import ChatButton from "./ChatButton";
 import AdminChat from "./admin/AdminChat";
 import VisitorConsole from "./visitor/VisitorConsole";
 import { useEffect, useRef, useState } from "react";
 import { VisitorScreen } from "./visitor/types";
 import { setOnlineStatus } from "./admin/actions";
+import LoginCard from "./admin/LoginCard";
 
 export default function ChatInstance() {
   const { isAuth, isOnline } = useAuthContext();
   const [showConsole, setShowConsole] = useState(false);
   const [screen, setScreen] = useState<VisitorScreen>("setup");
   const { chatId } = useVisitorContext();
+  const { showLogin } = useLoginContext();
   const isAuthRef = useRef(isAuth);
 
   const handleUnload = () => {
@@ -36,7 +38,7 @@ export default function ChatInstance() {
 
   return (
     <>
-      {!showConsole ? (
+      {!showLogin ? (!showConsole ? (
         <ChatButton
           isAdminOnline={isOnline}
           renderType="admin"
@@ -52,7 +54,7 @@ export default function ChatInstance() {
           setScreen={setScreen}
           screen={screen}
         />
-      )}
+      )): <LoginCard />}
     </>
   );
 }

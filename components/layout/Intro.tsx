@@ -1,6 +1,9 @@
+import AuthBtn from "../ui/AuthBtn";
+
 export default function Intro() {
   return (
-    <section className="mt-24 flex flex-col justify-end pb-20 px-8 md:px-16 relative overflow-hidden">
+    <section className="mt-18 flex flex-col justify-end pb-20 px-8 md:px-16 relative overflow-hidden">
+      <AuthBtn />
       <div className="fixed top-36 right-4 md:right-16 opacity-40">
         <span
           className="text-[11px] tracking-widest uppercase text-[#7A7A6A]"
@@ -31,8 +34,9 @@ export default function Intro() {
             fontSize: "clamp(3.5rem, 9vw, 9rem)",
           }}
         >
-          Making<br />ideas{" "}
-          <em className="text-[#E9B44C]">real</em>
+          Making
+          <br />
+          ideas <em className="text-[#E9B44C]">real</em>
           <br />
           enough to argue with.
         </h1>

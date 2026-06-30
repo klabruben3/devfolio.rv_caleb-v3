@@ -1,5 +1,4 @@
 import {
-  Authentication,
   ChatInstance,
   ConnectionStatus,
   CurrentSection,
@@ -8,7 +7,12 @@ import {
   LivePresence,
   Nav,
 } from "@/components";
-import { AuthProvider, SectionContextProvider, VisitorProvider } from "@/context";
+import {
+  AuthProvider,
+  LoginContextProvider,
+  SectionContextProvider,
+  VisitorProvider,
+} from "@/context";
 
 export default function Home() {
   return (
@@ -20,14 +24,19 @@ export default function Home() {
         <AuthProvider>
           <SectionContextProvider>
             <GlobalStyles />
+
+            {/* Fixed header */}
             <LivePresence />
-            <Authentication />
             <Nav />
+
+            {/* Upon offline */}
             <ConnectionStatus />
-            <main>
-              <CurrentSection />
-            </main>
-            <ChatInstance />
+            <LoginContextProvider>
+              <main>
+                <CurrentSection />
+              </main>
+              <ChatInstance />
+            </LoginContextProvider>
           </SectionContextProvider>
           <Footer />
         </AuthProvider>
