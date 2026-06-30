@@ -1,5 +1,7 @@
 "use client";
 
+import { useChatContext } from "@/context";
+import { supabase } from "@/lib/supabase/client";
 import { ChevronRight } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 
@@ -8,10 +10,11 @@ type Chat = {
   visitor: string;
   lastMessage: string;
   updatedAt: string;
-  unread: boolean;
+  visitor_read: boolean;
+  admin_read: boolean;
 };
 
-interface ChatsProp{
+interface ChatsProp {
   action: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -22,32 +25,51 @@ const chats: Chat[] = [
     lastMessage:
       "Hi Caleb, I really like your portfolio and wanted to discuss a freelance opportunity.",
     updatedAt: "2m ago",
-    unread: true,
+    visitor_read: true,
+    admin_read: false
   },
   {
     id: "2",
     visitor: "Sarah Williams",
     lastMessage: "Would you be available for a React contract next month?",
     updatedAt: "18m ago",
-    unread: false,
+    visitor_read: false,
+    admin_read: false
   },
   {
     id: "3",
     visitor: "Michael",
     lastMessage: "Just wanted to ask a question about your final year project.",
     updatedAt: "Yesterday",
-    unread: false,
+    visitor_read: true,
+    admin_read: true,
   },
 ];
 
-export default function Chats({ action: setShowChat } : ChatsProp) {
+export default function Chats({ action: setShowChat }: ChatsProp) {
+  const { setCurrChatId } = useChatContext();
+  const handleClick = async (chatId: string) => {
+    const { error } = await supabase
+      .from("chats")
+      .update({ admin_read: true })
+      .eq("id", chatId);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    setShowChat(true);
+    setCurrChatId(chatId);
+  };
+
   return (
     <div className="flex flex-col overflow-y-auto">
       {chats.map((chat) => (
         <button
           key={chat.id}
           type="button"
-          onClick={() => setShowChat(true)}
+          onClick={() => handleClick(chat.id)}
           className="
             group
             relative
@@ -67,7 +89,7 @@ export default function Chats({ action: setShowChat } : ChatsProp) {
           "
         >
           {/* unread indicator */}
-          {chat.unread && (
+          {!chat.admin_read && (
             <>
               <span className="absolute left-0 top-0 h-full w-[2px] bg-primary" />
 
@@ -75,7 +97,7 @@ export default function Chats({ action: setShowChat } : ChatsProp) {
             </>
           )}
 
-          {!chat.unread && (
+          {chat.admin_read && (
             <span className="h-2.5 w-2.5 rounded-full bg-white/10 shrink-0" />
           )}
 

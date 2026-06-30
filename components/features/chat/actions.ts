@@ -1,3 +1,6 @@
+import { Message } from "@/components/ui/types";
+import { supabase } from "@/lib/supabase/client";
+
 export function relativeTime(date: Date | string): string {
   const now = new Date();
   const then = new Date(date);
@@ -17,4 +20,31 @@ export function relativeTime(date: Date | string): string {
 
   // Older than a week — show actual date
   return then.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+}
+
+export async function send({ id, from, sender, text }: Message) {
+  // 1. Insert the message
+  const { error: messageError } = await supabase.from("messages").insert({
+    chat_id: id,
+    from,
+    sender,
+    text
+  });
+
+  if (messageError) {
+    console.error("Message error:", messageError);
+    return;
+  }
+
+  if (from !== "admin") {
+    // 2. Bump the parent chat (last_message + updated_at via trigger)
+    const { error: chatError } = await supabase
+      .from("chats")
+      .update({ last_message: text })
+      .eq("id", id);
+
+    if (chatError) {
+      console.error("Chat update error:", chatError);
+    }
+  }
 }

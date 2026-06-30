@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useState } from "react";
-import { Radio, X } from "lucide-react";
+import { ArrowLeftIcon, Radio, X } from "lucide-react";
 import Chats from "./Chats";
 import ChatMessageScreen from "../ChatMessageScreen";
 import { useAuthContext } from "@/context";
@@ -13,7 +13,7 @@ interface AdminChatProp {
 }
 
 export default function AdminChat({ action: setShowConsole }: AdminChatProp) {
-  const [hasChats, setHasChat] = useState(false);
+  const [hasChats, setHasChat] = useState(true);
   const [showChat, setShowChat] = useState(false);
   const { isOnline } = useAuthContext();
 
@@ -62,13 +62,29 @@ export default function AdminChat({ action: setShowConsole }: AdminChatProp) {
           >
             Inbox - DevFolio
           </h2>
-          <button
-            onClick={() => setShowConsole(false)}
-            className="opacity-40 hover:opacity-70 transition-opacity"
-            style={{ background: "none", border: "none", cursor: "pointer" }}
-          >
-            <X size={14} color="#f0ede6" />
-          </button>
+          <div className="flex gap-3">
+            {showChat && (
+              <button
+                onClick={() => setShowChat(false)}
+                className="opacity-40 hover:opacity-70 transition-opacity"
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                <ArrowLeftIcon size={14} color="#f0ede6" />
+              </button>
+            )}
+
+            <button
+              onClick={() => setShowConsole(false)}
+              className="opacity-40 hover:opacity-70 transition-opacity"
+              style={{ background: "none", border: "none", cursor: "pointer" }}
+            >
+              <X size={14} color="#f0ede6" />
+            </button>
+          </div>
         </div>
       </div>
 

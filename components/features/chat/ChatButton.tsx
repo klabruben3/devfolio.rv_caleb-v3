@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  type ComponentType,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import { type ComponentType, type Dispatch, type SetStateAction } from "react";
 import {
   MessageSquareDashed,
   MessageSquareDashedIcon,
@@ -12,6 +8,8 @@ import {
   MessageSquarePlus,
   MessageSquareText,
 } from "lucide-react";
+import { useVisitorContext } from "@/context";
+import { supabase } from "@/lib/supabase/client";
 
 interface ChatButtonProps {
   renderType: "admin" | "visitor";
@@ -67,6 +65,7 @@ interface ChatLayoutProps {
 }
 
 function ChatLayout({ Icon, variant, action: setShowChat }: ChatLayoutProps) {
+  const { chatId } = useVisitorContext();
   const styles = {
     online: {
       icon: "text-accent",
@@ -109,6 +108,22 @@ function ChatLayout({ Icon, variant, action: setShowChat }: ChatLayoutProps) {
 
   const shouldPulse = variant === "online" || variant === "new-message";
 
+  const handleClick = async () => {
+    if (chatId) {
+      const { error } = await supabase
+        .from("chats")
+        .update({ visitor_read: true })
+        .eq("id", chatId);
+
+      if (error) {
+        console.log(error);
+        return;
+      }
+    }
+
+    setShowChat(true);
+  };
+
   return (
     <div className="fixed bottom-5 right-5 z-50">
       {/* Soft glow / communication pulse behind button */}
@@ -128,7 +143,7 @@ function ChatLayout({ Icon, variant, action: setShowChat }: ChatLayoutProps) {
         type="button"
         aria-label={current.label}
         title={current.label}
-        onClick={() => setShowChat(true)}
+        onClick={handleClick}
         className={[
           "group relative grid h-13 w-13 place-items-center",
           "rounded-xl",

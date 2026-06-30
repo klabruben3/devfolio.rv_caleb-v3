@@ -2,19 +2,22 @@
 import { useLoginContext, usePinContext } from "@/context";
 import { supabase } from "@/lib/supabase/client";
 import { Eye, EyeOff, LockKeyhole, Mail, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function LoginCard() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const emailInputRef = useRef<HTMLInputElement | null>(null);
+
   const { setShowLogin } = useLoginContext();
   const { setPin } = usePinContext();
 
-  const handleClose = () =>{
+  const handleClose = () => {
     setShowLogin(false);
     setPin("");
-  }
+  };
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -41,6 +44,10 @@ export default function LoginCard() {
 
     setShowLogin(false);
   }
+
+  useEffect(() => {
+    emailInputRef.current?.focus();
+  }, []);
 
   return (
     <main
@@ -97,6 +104,7 @@ export default function LoginCard() {
             <div className="group relative">
               <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary" />
               <input
+                ref={emailInputRef}
                 id="email"
                 name="email"
                 type="email"

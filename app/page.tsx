@@ -10,6 +10,7 @@ import {
 } from "@/components";
 import {
   AuthProvider,
+  ChatContextProvider,
   LoginContextProvider,
   PinContextProvider,
   SectionContextProvider,
@@ -36,8 +37,9 @@ export default function Home() {
                 <LivePresence />
 
                 <Nav />
-
-                <ChatInstance />
+                <ChatContextProvider>
+                  <ChatInstance />
+                </ChatContextProvider>
               </PinContextProvider>
 
               {/* Upon offline */}

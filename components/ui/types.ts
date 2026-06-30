@@ -3,5 +3,5 @@ export interface Message {
   from: "admin" | "visitor";
   sender: string;
   text: string;
-  time: string;
+  time?: string;
 }

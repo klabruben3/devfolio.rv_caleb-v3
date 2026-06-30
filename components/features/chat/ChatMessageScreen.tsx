@@ -2,25 +2,40 @@
 
 import MessageBlock from "@/components/ui/MessageBlock";
 import { Message } from "@/components/ui/types";
-import { useAuthContext } from "@/context";
+import { useAuthContext, useChatContext, useVisitorContext } from "@/context";
 import { useLenis } from "lenis/react";
 import { Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import UpdateDetails from "./visitor/UpdateDetails";
 import MyContactDetails from "./visitor/MyContactDetails";
+import { send } from "./actions";
 
 export default function ChatMessageScreen() {
   const [draft, setDraft] = useState("");
-  const bottomRef = useRef<HTMLDivElement>(null);
   const { isOnline, isAuth } = useAuthContext();
   const [hoveringChat, setHoveringChat] = useState(false);
   const [showContactInfo, setShowContactInfo] = useState(false);
   const [showUpdateCard, setShowUpdateCard] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const { chatId, visitorName } = useVisitorContext();
+  const {currChatId} = useChatContext()
+
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const messages: Message[] = [];
-  const handleSend = () => {
+  const handleSend = async () => {
     if (draft.trim()) {
-      console.log("supabase: sending a message");
+      setIsSending(true);
+
+      send({
+        id: chatId ? chatId : currChatId,
+        from: chatId ? "visitor" : "admin",
+        sender: chatId ? visitorName : "Ruben",
+        text: draft
+      });
+
+      setIsSending(false);
       setDraft("");
     }
   };
@@ -35,7 +50,12 @@ export default function ChatMessageScreen() {
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    textAreaRef.current?.focus()
   }, [messages]);
+
+  useEffect(() =>{
+    
+  }, [])
 
   // Stops Lenis from running upon mouse enter
   const lenis = useLenis();
@@ -115,12 +135,13 @@ export default function ChatMessageScreen() {
       >
         <div className="flex gap-2 items-end">
           <textarea
+          ref={textAreaRef}
             id="message"
             aria-label="Message"
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
+              if (e.key === "Enter") {
                 e.preventDefault();
                 handleSend();
               }
@@ -140,16 +161,19 @@ export default function ChatMessageScreen() {
           />
           <button
             onClick={handleSend}
-            disabled={!draft.trim()}
+            disabled={!draft.trim() && !isSending}
             className="flex-shrink-0 p-2.5 transition-opacity hover:opacity-80"
             style={{
-              background: draft.trim() ? "#e9b44c" : "#2a2a20",
+              background: draft.trim() || isSending ? "#e9b44c" : "#2a2a20",
               borderRadius: "2px",
               border: "none",
-              cursor: draft.trim() ? "pointer" : "not-allowed",
+              cursor: draft.trim() || isSending ? "pointer" : "not-allowed",
             }}
           >
-            <Send size={13} color={draft.trim() ? "#0d0d0b" : "#3a3a30"} />
+            <Send
+              size={13}
+              color={draft.trim() || isSending ? "#0d0d0b" : "#3a3a30"}
+            />
           </button>
         </div>
         <div className="flex justify-between items-center mt-1.5">

@@ -12,12 +12,14 @@ import { supabase } from "@/lib/supabase/client";
 type VisitorContextType = {
   chatId: string | null;
   initialize: () => Promise<void>;
+  visitorName: string;
 };
 
 const VisitorContext = createContext<VisitorContextType | null>(null);
 
 export function VisitorProvider({ children }: { children: React.ReactNode }) {
   const [chatId, setChatId] = useState<string | null>(null);
+  const [visitorName, setVisitorName] = useState<string>("");
 
   const initialize = useCallback(async () => {
     const {
@@ -28,11 +30,12 @@ export function VisitorProvider({ children }: { children: React.ReactNode }) {
 
     const { data: visitor } = await supabase
       .from("visitors")
-      .select("chat_id")
+      .select("chat_id, name")
       .single();
 
     if (visitor?.chat_id) {
       setChatId(visitor.chat_id);
+      setVisitorName(visitor.name)
     } else {
       await supabase.auth.signOut();
     }
@@ -43,7 +46,7 @@ export function VisitorProvider({ children }: { children: React.ReactNode }) {
   }, [initialize]);
 
   return (
-    <VisitorContext.Provider value={{ chatId, initialize }}>
+    <VisitorContext.Provider value={{ chatId, initialize, visitorName }}>
       {children}
     </VisitorContext.Provider>
   );
