@@ -49,7 +49,7 @@ export default function LivePresence() {
   const { isAuth, isOnline, lastSeen } = useAuthContext();
   const { chatId } = useVisitorContext();
   const { setShowLogin } = useLoginContext();
-  const { pin } = usePinContext();
+  const { pin, setPin } = usePinContext();
 
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -82,7 +82,8 @@ export default function LivePresence() {
     if (!pin) return;
     const result = await requestLogin(pin);
 
-    if(result === "Success") setShowLogin(true)
+    if(result === "Success") setShowLogin(true);
+    setPin("")
   };
 
   useEffect(() => {
