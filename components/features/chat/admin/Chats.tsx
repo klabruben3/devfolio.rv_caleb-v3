@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase/client";
 import { ChevronRight } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 import { Chat } from "./types";
+import { relativeTime } from "../actions";
 
 interface ChatsProp {
   chats: Chat[] | null;
@@ -30,6 +31,8 @@ export default function Chats({ action: setShowChat, chats }: ChatsProp) {
     setShowChat(true);
     setCurrChatId(chatId);
   };
+
+  console.log(chats[0].updated_at)
 
   return (
     <div className="flex flex-col overflow-y-auto">
@@ -93,7 +96,7 @@ export default function Chats({ action: setShowChat, chats }: ChatsProp) {
                   text-muted-foreground
                 "
               >
-                {chat.updatedAt}
+                {relativeTime(chat.updated_at)}
               </span>
             </div>
 
@@ -105,7 +108,7 @@ export default function Chats({ action: setShowChat, chats }: ChatsProp) {
                 text-muted-foreground
               "
             >
-              {chat.lastMessage}
+              {chat.last_message}
             </p>
           </div>
 

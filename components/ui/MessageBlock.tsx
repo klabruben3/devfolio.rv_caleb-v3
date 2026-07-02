@@ -1,13 +1,15 @@
+import { relativeTime } from "../features/chat/actions";
 import { cn } from "../utils/cn";
 import { Message } from "./types";
 
 export default function MessageBlock({ msg }: { msg: Message }) {
     const isAdmin = msg.from === "admin";
+    const time = relativeTime(msg.time!)
 
     return (
       <div className={cn("flex flex-col mb-4", isAdmin ? "items-start" : "items-end")}>
         <span style={{ fontFamily: "JetBrains Mono", fontSize: "8px", color: "#3a3a30", letterSpacing: "0.1em", marginBottom: "4px" }}>
-          {isAdmin ? "caleb" : msg.sender.toLowerCase()} · {msg.time}
+          {isAdmin ? "caleb" : msg.sender.toLowerCase()} · {time}
         </span>
         <div
           className="relative max-w-[85%] px-3 py-2"
