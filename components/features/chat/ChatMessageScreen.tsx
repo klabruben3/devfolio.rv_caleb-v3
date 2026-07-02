@@ -12,24 +12,28 @@ import { send } from "./actions";
 
 export default function ChatMessageScreen() {
   const [draft, setDraft] = useState("");
-  const { isOnline, isAuth } = useAuthContext();
   const [hoveringChat, setHoveringChat] = useState(false);
   const [showContactInfo, setShowContactInfo] = useState(false);
   const [showUpdateCard, setShowUpdateCard] = useState(false);
   const [isSending, setIsSending] = useState(false);
-  const { chatId, visitorName } = useVisitorContext();
+  const { isOnline, isAuth } = useAuthContext();
+  const {
+    chatId,
+    visitorName,
+    messages: visitorMessages,
+  } = useVisitorContext();
   const { currChatId } = useChatContext();
 
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const messages: Message[] = [];
+  const messages: Message[] = chatId ? visitorMessages : [];
   const handleSend = async () => {
     if (draft.trim()) {
       setIsSending(true);
 
       send({
-        id: chatId ? chatId : currChatId,
+        chat_id: chatId ? chatId : currChatId,
         from: chatId ? "visitor" : "admin",
         sender: chatId ? visitorName : "Ruben",
         text: draft,

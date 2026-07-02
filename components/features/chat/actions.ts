@@ -22,10 +22,10 @@ export function relativeTime(date: Date | string): string {
   return then.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
 }
 
-export async function send({ id, from, sender, text }: Message) {
+export async function send({ chat_id, from, sender, text }: Message) {
   // 1. Insert the message
   const { error: messageError } = await supabase.from("messages").insert({
-    chat_id: id,
+    chat_id: chat_id,
     from,
     sender,
     text,
@@ -43,7 +43,7 @@ export async function send({ id, from, sender, text }: Message) {
       last_message: text,
       [from === "visitor" ? "admin_read" : "visitor_read"]: false,
     })
-    .eq("id", id);
+    .eq("id", chat_id);
 
   if (chatError) {
     console.error("Chat update error:", chatError);

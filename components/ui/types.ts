@@ -1,5 +1,6 @@
 export interface Message {
-  id: string;
+  id?: string;
+  chat_id: string;
   from: "admin" | "visitor";
   sender: string;
   text: string;
