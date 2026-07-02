@@ -79,8 +79,7 @@ export default function ChatMessageScreen() {
   }, [messages]);
 
   useEffect(() => {
-    if (!isAuth) return;
-    console.log("itsssss admin") // only for for Rubza👇👇👇
+    if (!isAuth) return; // only for for Rubza👇👇👇
     initialize();
 
     // Subscribe to message changes
