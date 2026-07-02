@@ -93,7 +93,7 @@ export function VisitorProvider({ children }: { children: React.ReactNode }) {
 
     // Keeps visitor chats updated
     const messagesInsertsChannel = supabase
-      .channel(`messages-${chatId}`)
+      .channel(`messages-${chatId}-visitor`)
       .on(
         "postgres_changes",
         {

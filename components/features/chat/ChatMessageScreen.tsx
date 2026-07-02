@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import UpdateDetails from "./visitor/UpdateDetails";
 import MyContactDetails from "./visitor/MyContactDetails";
 import { send } from "./actions";
+import { supabase } from "@/lib/supabase/client";
 
 export default function ChatMessageScreen() {
   const [draft, setDraft] = useState("");
@@ -17,17 +18,37 @@ export default function ChatMessageScreen() {
   const [showUpdateCard, setShowUpdateCard] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const { isOnline, isAuth } = useAuthContext();
+
+  // admin messages
+  const { currChatId } = useChatContext();
+  const [adimMessages, setAdminMessages] = useState<Message[]>([]);
+  //
+
+  // Fetch messages for message.chat_id === currChatId
+  async function initialize() {
+    const { data: Messages } = await supabase
+      .from("messages")
+      .select("*")
+      .eq("chat_id", currChatId)
+      .order("time");
+
+    if (Messages) {
+      setAdminMessages(Messages);
+    }
+  } //
+
+  // Visitor messages
   const {
     chatId,
     visitorName,
     messages: visitorMessages,
   } = useVisitorContext();
-  const { currChatId } = useChatContext();
+  //
 
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const messages: Message[] = chatId ? visitorMessages : [];
+  const messages: Message[] = chatId ? visitorMessages : adimMessages;
   const handleSend = async () => {
     if (draft.trim()) {
       setIsSending(true);
@@ -57,7 +78,32 @@ export default function ChatMessageScreen() {
     textAreaRef.current?.focus();
   }, [messages]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!isAuth) return;
+    console.log("itsssss admin") // only for for Rubza👇👇👇
+    initialize();
+
+    // Subscribe to message changes
+    const messagesInsertsChannel = supabase
+      .channel(`messages-${currChatId}-admin`)
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "messages",
+          filter: `chat_id=eq.${currChatId}`,
+        },
+        (payload) => {
+          setAdminMessages((prev) => [...prev, payload.new as Message]);
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(messagesInsertsChannel);
+    };
+  }, []);
 
   // Stops Lenis from running upon mouse enter
   const lenis = useLenis();

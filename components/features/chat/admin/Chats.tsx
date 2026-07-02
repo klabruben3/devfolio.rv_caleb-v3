@@ -32,8 +32,6 @@ export default function Chats({ action: setShowChat, chats }: ChatsProp) {
     setCurrChatId(chatId);
   };
 
-  console.log(chats[0].updated_at)
-
   return (
     <div className="flex flex-col overflow-y-auto">
       {chats.map((chat) => (
