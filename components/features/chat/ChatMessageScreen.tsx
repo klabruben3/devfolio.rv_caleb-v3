@@ -18,7 +18,7 @@ export default function ChatMessageScreen() {
   const [showUpdateCard, setShowUpdateCard] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const { chatId, visitorName } = useVisitorContext();
-  const {currChatId} = useChatContext()
+  const { currChatId } = useChatContext();
 
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -32,7 +32,7 @@ export default function ChatMessageScreen() {
         id: chatId ? chatId : currChatId,
         from: chatId ? "visitor" : "admin",
         sender: chatId ? visitorName : "Ruben",
-        text: draft
+        text: draft,
       });
 
       setIsSending(false);
@@ -50,12 +50,10 @@ export default function ChatMessageScreen() {
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-    textAreaRef.current?.focus()
+    textAreaRef.current?.focus();
   }, [messages]);
 
-  useEffect(() =>{
-    
-  }, [])
+  useEffect(() => {}, []);
 
   // Stops Lenis from running upon mouse enter
   const lenis = useLenis();
@@ -135,7 +133,7 @@ export default function ChatMessageScreen() {
       >
         <div className="flex gap-2 items-end">
           <textarea
-          ref={textAreaRef}
+            ref={textAreaRef}
             id="message"
             aria-label="Message"
             value={draft}

@@ -28,7 +28,7 @@ export async function send({ id, from, sender, text }: Message) {
     chat_id: id,
     from,
     sender,
-    text
+    text,
   });
 
   if (messageError) {
@@ -36,15 +36,16 @@ export async function send({ id, from, sender, text }: Message) {
     return;
   }
 
-  if (from !== "admin") {
-    // 2. Bump the parent chat (last_message + updated_at via trigger)
-    const { error: chatError } = await supabase
-      .from("chats")
-      .update({ last_message: text })
-      .eq("id", id);
+  // 2. Bump the parent chat (last_message + updated_at via trigger)
+  const { error: chatError } = await supabase
+    .from("chats")
+    .update({
+      last_message: text,
+      [from === "visitor" ? "admin_read" : "visitor_read"]: false,
+    })
+    .eq("id", id);
 
-    if (chatError) {
-      console.error("Chat update error:", chatError);
-    }
+  if (chatError) {
+    console.error("Chat update error:", chatError);
   }
 }

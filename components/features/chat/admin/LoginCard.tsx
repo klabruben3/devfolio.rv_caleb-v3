@@ -1,5 +1,5 @@
 "use client";
-import { useLoginContext, usePinContext } from "@/context";
+import { useAuthContext, useLoginContext, usePinContext } from "@/context";
 import { supabase } from "@/lib/supabase/client";
 import { Eye, EyeOff, LockKeyhole, Mail, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -13,6 +13,7 @@ export default function LoginCard() {
 
   const { setShowLogin } = useLoginContext();
   const { setPin } = usePinContext();
+  const {initialize} = useAuthContext()
 
   const handleClose = () => {
     setShowLogin(false);
@@ -41,6 +42,8 @@ export default function LoginCard() {
       setErrorMessage(error.message);
       return;
     }
+
+    await initialize()
 
     setShowLogin(false);
   }

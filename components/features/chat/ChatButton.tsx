@@ -13,7 +13,7 @@ import { supabase } from "@/lib/supabase/client";
 
 interface ChatButtonProps {
   renderType: "admin" | "visitor";
-  newMessage: boolean;
+  read: boolean | number | null;
   isAdminOnline: boolean;
   typing: boolean;
   action: Dispatch<SetStateAction<boolean>>;
@@ -21,7 +21,7 @@ interface ChatButtonProps {
 
 export default function ChatButton({
   renderType,
-  newMessage,
+  read,
   isAdminOnline,
   typing,
   action,
@@ -42,7 +42,7 @@ export default function ChatButton({
   }
 
   // Override if there's a new message
-  if (newMessage) {
+  if (read === false || (typeof read === "number" && read > 0)) {
     Icon = MessageSquareText;
     variant = "new-message";
   }
@@ -53,7 +53,7 @@ export default function ChatButton({
     variant = "typing";
   }
 
-  return <ChatLayout Icon={Icon} variant={variant} action={action} />;
+  return <ChatLayout Icon={Icon} variant={variant} action={action} read={read} />;
 }
 
 type Variant = "online" | "offline" | "new-message" | "typing";
@@ -62,9 +62,10 @@ interface ChatLayoutProps {
   Icon: ComponentType<{ className?: string }>;
   variant: Variant;
   action: Dispatch<SetStateAction<boolean>>;
+  read: boolean | number | null;
 }
 
-function ChatLayout({ Icon, variant, action: setShowChat }: ChatLayoutProps) {
+function ChatLayout({ Icon, variant, action: setShowChat, read }: ChatLayoutProps) {
   const { chatId } = useVisitorContext();
   const styles = {
     online: {
@@ -176,7 +177,7 @@ function ChatLayout({ Icon, variant, action: setShowChat }: ChatLayoutProps) {
         {/* New message badge */}
         {variant === "new-message" && (
           <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full border border-card bg-primary px-1 text-[9px] font-bold text-primary-foreground shadow-sm">
-            !
+            {typeof read === "number"  && read > 0 ? read : "!"}
           </span>
         )}
       </button>
