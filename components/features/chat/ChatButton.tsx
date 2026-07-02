@@ -66,7 +66,7 @@ interface ChatLayoutProps {
 }
 
 function ChatLayout({ Icon, variant, action: setShowChat, read }: ChatLayoutProps) {
-  const { chatId } = useVisitorContext();
+  const { chatId,visitorRead } = useVisitorContext();
   const styles = {
     online: {
       icon: "text-accent",
@@ -110,7 +110,7 @@ function ChatLayout({ Icon, variant, action: setShowChat, read }: ChatLayoutProp
   const shouldPulse = variant === "online" || variant === "new-message";
 
   const handleClick = async () => {
-    if (chatId) {
+    if (chatId && visitorRead === false) {      
       const { error } = await supabase
         .from("chats")
         .update({ visitor_read: true })

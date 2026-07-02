@@ -4,50 +4,18 @@ import { useChatContext } from "@/context";
 import { supabase } from "@/lib/supabase/client";
 import { ChevronRight } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
-
-type Chat = {
-  id: string;
-  visitor: string;
-  lastMessage: string;
-  updatedAt: string;
-  visitor_read: boolean;
-  admin_read: boolean;
-};
+import { Chat } from "./types";
 
 interface ChatsProp {
+  chats: Chat[] | null;
   action: Dispatch<SetStateAction<boolean>>;
 }
 
-const chats: Chat[] = [
-  {
-    id: "1",
-    visitor: "John Doe",
-    lastMessage:
-      "Hi Caleb, I really like your portfolio and wanted to discuss a freelance opportunity.",
-    updatedAt: "2m ago",
-    visitor_read: true,
-    admin_read: false
-  },
-  {
-    id: "2",
-    visitor: "Sarah Williams",
-    lastMessage: "Would you be available for a React contract next month?",
-    updatedAt: "18m ago",
-    visitor_read: false,
-    admin_read: false
-  },
-  {
-    id: "3",
-    visitor: "Michael",
-    lastMessage: "Just wanted to ask a question about your final year project.",
-    updatedAt: "Yesterday",
-    visitor_read: true,
-    admin_read: true,
-  },
-];
-
-export default function Chats({ action: setShowChat }: ChatsProp) {
+export default function Chats({ action: setShowChat, chats }: ChatsProp) {
   const { setCurrChatId } = useChatContext();
+
+  if (!chats) return;
+
   const handleClick = async (chatId: string) => {
     const { error } = await supabase
       .from("chats")

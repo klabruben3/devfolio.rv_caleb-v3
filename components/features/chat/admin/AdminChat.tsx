@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ArrowLeftIcon, Radio, X } from "lucide-react";
 import Chats from "./Chats";
 import ChatMessageScreen from "../ChatMessageScreen";
@@ -13,13 +13,19 @@ interface AdminChatProp {
 }
 
 export default function AdminChat({ action: setShowConsole }: AdminChatProp) {
-  const [hasChats, setHasChat] = useState(true);
+  const [hasChats, setHasChat] = useState(false);
   const [showChat, setShowChat] = useState(false);
-  const { isOnline } = useAuthContext();
+  const { isOnline, chats } = useAuthContext();
 
   const handleToggle = () => {
     setOnlineStatus(!isOnline);
   };
+
+  useEffect(() => {
+    if(!chats) return;
+    const chatCount = chats.length
+    setHasChat(chatCount > 0 ? true : false);
+  }, [chats]);
 
   return (
     <div
@@ -152,7 +158,7 @@ export default function AdminChat({ action: setShowConsole }: AdminChatProp) {
           </span>
         </div>
       ) : !showChat ? (
-        <Chats action={setShowChat} />
+        <Chats action={setShowChat} chats={chats} />
       ) : (
         <ChatMessageScreen />
       )}
