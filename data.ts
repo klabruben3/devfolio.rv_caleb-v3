@@ -1,111 +1,63 @@
 const thinkingCards = [
   {
     id: 1,
-    topic: "Human Discovery Platforms",
-    note: "How do people find each other when they don't know what they're looking for?",
+    topic: "Living Software",
+    note: "What happens when a portfolio stops being a page and starts becoming a system you operate?",
     type: "question",
     rot: -2.1,
   },
   {
     id: 2,
-    topic: "Academic Analytics",
-    note: "Citation graphs miss the real story — the *why* behind research paths.",
+    topic: "Academic Systems",
+    note: "Students don't necessarily lack information. The information is just scattered across too many places.",
     type: "observation",
     rot: 1.4,
   },
   {
     id: 3,
-    topic: "AI Systems",
-    note: "Models that explain their uncertainty are more useful than confident ones.",
+    topic: "AI Assistants",
+    note: "An assistant becomes much more useful when it can fetch the right context instead of being given everything.",
     type: "idea",
     rot: -0.8,
   },
   {
     id: 4,
     topic: "Multiplayer Networking",
-    note: "State sync is a philosophy problem before it's a technical one.",
-    type: "question",
+    note: "The viewport is only a projection. The world has to exist somewhere else.",
+    type: "observation",
     rot: 2.2,
   },
   {
     id: 5,
-    topic: "Speech Recognition",
-    note: "Accent bias is a dataset problem that sounds like an ML problem.",
-    type: "observation",
+    topic: "Developer Tooling",
+    note: "The decisions behind a project are often more valuable than the final repository.",
+    type: "idea",
     rot: -1.5,
   },
   {
     id: 6,
-    topic: "Distributed Systems",
-    note: "Clocks lie. Networks lie. Design accordingly.",
-    type: "idea",
+    topic: "System Design",
+    note: "Most architecture problems eventually become questions about where truth should live.",
+    type: "question",
     rot: 0.6,
   },
 ];
 
+// ─── Timeline ─────────────────────────────────────────────────────────────────
+
 const timelineNodes = [
-  {
-    year: 2022,
-    items: [
-      {
-        label: "First TypeScript project",
-        type: "tech",
-        desc: "Migrated a Python scraper to TS. Hated it, then couldn't go back.",
-      },
-      {
-        label: "Built a todo app (seriously)",
-        type: "experiment",
-        desc: "The cliché that taught me more about state than any tutorial.",
-      },
-      {
-        label: "Discovered graph databases",
-        type: "research",
-        desc: "Neo4j changed how I think about data relationships.",
-      },
-    ],
-  },
-  {
-    year: 2023,
-    items: [
-      {
-        label: "Meridian v0.1",
-        type: "project",
-        desc: "Academic graph for connecting researchers. First real users.",
-      },
-      {
-        label: "Learned Python for ML",
-        type: "tech",
-        desc: "Needed it for Meridian's recommendation engine. Stayed for pandas.",
-      },
-      {
-        label: "Failed: real-time collaboration",
-        type: "lesson",
-        desc: "CRDTs are beautiful until you try to explain them to a user.",
-      },
-    ],
-  },
   {
     year: 2024,
     items: [
       {
-        label: "Echo — speech prototype",
+        label: "Devfolio begins",
         type: "project",
-        desc: "Multilingual speech recognition for education. Abandoned after 3 months.",
+        desc: "Started building a personal portfolio. It gradually became something much less static.",
       },
       {
-        label: "Rust experiment",
-        type: "tech",
-        desc: "Rewrote a networking module. 10x faster, 100x more humbling.",
-      },
-      {
-        label: "Lattice — multiplayer state",
-        type: "project",
-        desc: "Distributed game state sync. Still running.",
-      },
-      {
-        label: "GLSL shaders",
-        type: "research",
-        desc: "Fell into graphics. Still haven't fully emerged.",
+        label: "Frontend → full-stack",
+        type: "lesson",
+        desc: "UI work kept leading into auth, databases, permissions, deployment and system state.",
       },
     ],
   },
@@ -113,19 +65,19 @@ const timelineNodes = [
     year: 2025,
     items: [
       {
-        label: "Meridian v2 — rebuilt",
-        type: "project",
-        desc: "Completely redesigned. Knowledge graphs, not just citation graphs.",
+        label: "Building beyond the interface",
+        type: "tech",
+        desc: "Started treating databases, authorization and realtime behaviour as part of the product rather than backend details.",
       },
       {
-        label: "Started writing publicly",
-        type: "experiment",
-        desc: "Not a blog. Just notes that felt too heavy to keep private.",
+        label: "Realtime systems",
+        type: "research",
+        desc: "Presence, chat and synchronized state became recurring problems in the things I wanted to build.",
       },
       {
-        label: "Human Discovery Platform",
-        type: "idea",
-        desc: "Still thinking. Still circling. Not ready.",
+        label: "Supabase becomes infrastructure",
+        type: "tech",
+        desc: "Auth turned into RLS, realtime, storage, server-side validation and increasingly stateful applications.",
       },
     ],
   },
@@ -133,197 +85,329 @@ const timelineNodes = [
     year: 2026,
     items: [
       {
-        label: "Currently building",
+        label: "Devfolio v3",
+        type: "project",
+        desc: "Rebuilt the portfolio as a realtime public/private workspace with anonymous visitors, admin auth, presence and live conversations.",
+      },
+      {
+        label: "Buhle Bezwe ECD",
+        type: "project",
+        desc: "Shipped a client-facing website for a real early childhood development centre.",
+      },
+      {
+        label: "Workbench",
+        type: "project",
+        desc: "Started building an internal engineering workspace for projects, ideas, decisions, bugs, patterns and AI-assisted knowledge capture.",
+      },
+      {
+        label: "Academiq",
+        type: "project",
+        desc: "Turned an academic planner into a full academic workspace and started putting it in front of real students.",
+      },
+      {
+        label: "Iris",
+        type: "experiment",
+        desc: "Moved from chatbot-style AI toward assistants that can selectively fetch application state and use tools.",
+      },
+      {
+        label: "Medusa",
+        type: "research",
+        desc: "Started building a document-processing pipeline for turning university study guides into structured academic data.",
+      },
+      {
+        label: "Phase Shift",
         type: "present",
-        desc: "Three things in parallel. One will survive.",
+        desc: "Currently exploring authoritative multiplayer simulation, persistent world space, interpolation and networked movement.",
       },
     ],
   },
 ];
 
+// ─── Projects ─────────────────────────────────────────────────────────────────
+
 const projects = [
   {
-    id: "meridian",
-    name: "Meridian",
-    tagline: "A graph for academic minds",
+    id: "academiq",
+    name: "Academiq",
+    tagline: "An academic workspace that understands the semester",
     status: "Live",
-    year: "2023 – present",
+    year: "2026 – present",
     problem:
-      "Researchers publish papers, but discovery is broken. The algorithm optimizes for citations, not curiosity. Good work stays invisible.",
+      "Academic information is fragmented across study guides, learning platforms, calendars, spreadsheets, announcements and individual module pages.",
     motivation:
-      "I spent two weeks trying to find researchers working on a specific intersection of ML and cognitive science. PubMed, Google Scholar, ResearchGate — none of them understood what I was looking for.",
-    tech: ["Python", "Neo4j", "TypeScript", "React", "FastAPI"],
+      "I wanted one place where a student could understand what is happening academically — what is next, where they stand, and what needs attention.",
+    tech: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "AI SDK",
+    ],
     lesson:
-      "The hardest part wasn't the graph. It was deciding what a 'connection' means. Every data model is a philosophy.",
+      "The difficult part isn't displaying academic data. It's modelling enough of the rules behind it that the software can actually reason about a student's semester.",
     future:
-      "If it becomes the place where research conversations happen — not just where papers land — that would be enough.",
+      "Deeper academic integrations, stronger document intelligence, better reasoning through Iris and a much larger module template ecosystem.",
   },
   {
-    id: "lattice",
-    name: "Lattice",
-    tagline: "Multiplayer state, without the lies",
+    id: "devfolio",
+    name: "Devfolio v3",
+    tagline: "A portfolio that became a workspace",
     status: "Active",
-    year: "2024",
+    year: "2024 – present",
     problem:
-      "Every multiplayer system I built eventually broke under concurrent writes. I kept patching instead of understanding.",
+      "Most portfolios become stale the moment they're deployed. They show work, but they don't participate in it.",
     motivation:
-      "I wanted to understand why distributed state is hard. Not 'hard' as in complex code. Hard as in: reality doesn't have a single source of truth.",
-    tech: ["Rust", "WebSockets", "CRDTs", "TypeScript"],
+      "I wanted my portfolio to feel alive — something I could operate from the inside while everyone else experiences the public-facing version.",
+    tech: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "Realtime",
+    ],
     lesson:
-      "Conflict resolution isn't a technical problem. It's a decision about whose reality wins. That decision should be explicit, not hidden in an algorithm.",
+      "A public website and an internal tool don't necessarily have to be separate products. Identity, permissions and state can completely change what the same interface becomes.",
     future:
-      "Possibly a library. Possibly abandoned. Currently just understood.",
+      "Move more of the site into database-driven content and continue turning it into a configurable digital headquarters for my work.",
   },
   {
-    id: "echo",
-    name: "Echo",
-    tagline: "Speech recognition for the other 70%",
-    status: "Abandoned",
-    year: "2024",
+    id: "workbench",
+    name: "Workbench",
+    tagline: "Engineering everything",
+    status: "Active",
+    year: "2026 – present",
     problem:
-      "Every speech model I tested performed significantly worse on non-native English speakers. The gap was embarrassing.",
+      "Repositories remember code. They are much worse at remembering why the code became what it is.",
     motivation:
-      "My mother speaks English with a heavy accent. Every voice assistant she uses fails her regularly.",
-    tech: ["Python", "Whisper", "FastAPI", "PyTorch"],
+      "I wanted somewhere to keep projects, ideas, decisions, bugs, patterns, technologies and engineering notes connected to the actual work.",
+    tech: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "AI SDK",
+      "OpenAI",
+    ],
     lesson:
-      "I abandoned Echo not because it didn't work — but because I realized I couldn't solve the training data problem alone. Bias at dataset scale requires institutional change, not a clever fine-tune.",
+      "AI becomes more interesting when it works against structured personal context instead of behaving like an isolated chat window.",
     future:
-      "The problem still exists. Someone with more resources should build this.",
+      "Let the workspace understand ongoing engineering work, surface patterns and eventually publish selected parts directly into Devfolio.",
+  },
+  {
+    id: "medusa",
+    name: "Medusa",
+    tagline: "Documents in. Structured academic data out.",
+    status: "Active",
+    year: "2026 – present",
+    problem:
+      "University study guides contain the information Academiq needs, but that information arrives as messy human-oriented documents rather than predictable schemas.",
+    motivation:
+      "Adding every module manually doesn't scale. I wanted to see how far a document-processing system could go toward building modules automatically.",
+    tech: [
+      "Python",
+      "FastAPI",
+      "VoyageAI",
+      "ChromaDB",
+      "Groq",
+      "PDF Processing",
+    ],
+    lesson:
+      "Extraction isn't just an LLM problem. Layout, tables, chunking, retrieval, validation and strict schema rules often matter more than the final prompt.",
+    future:
+      "More reliable extraction, OCR support, stronger validation and tighter integration with Academiq's module creation pipeline.",
+  },
+  {
+    id: "phase-shift",
+    name: "Phase Shift",
+    tagline: "A world that exists beyond the viewport",
+    status: "Active",
+    year: "2026 – present",
+    problem:
+      "Multiplayer movement becomes fragile when clients are allowed to define their own version of where the world is.",
+    motivation:
+      "I wanted to understand multiplayer architecture below the visual layer: authority, simulation, latency, interpolation and world state.",
+    tech: [
+      "TypeScript",
+      "Socket.IO",
+      "Node.js",
+      "Realtime",
+      "Authoritative Server",
+    ],
+    lesson:
+      "Screen coordinates and world coordinates are fundamentally different things. Once the server owns the world, the client becomes a projection of it.",
+    future:
+      "Smooth interpolation, input reconciliation, vicinity-based updates and server-managed spatial partitioning.",
+  },
+  {
+    id: "buhle-bezwe",
+    name: "Buhle Bezwe ECD",
+    tagline: "A digital home for a growing ECD centre",
+    status: "Live",
+    year: "2026",
+    problem:
+      "The centre needed a modern online presence that could clearly communicate its programmes, services and identity to parents.",
+    motivation:
+      "It was an opportunity to build something for a real organisation rather than another project existing only as a technical exercise.",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    lesson:
+      "Real products have audiences, constraints and content that exist independently of what is technically interesting to build.",
+    future:
+      "Parent and administrative tooling could eventually turn the public site into a larger operational platform.",
   },
 ];
+
+// ─── Ideas ────────────────────────────────────────────────────────────────────
 
 const ideas = [
   {
     id: 1,
-    name: "Knowledge Graph OS",
-    status: "Researching",
-    date: "Jan 2025",
-    why: "What if your second brain had the structure of your actual thoughts, not folders?",
-    tags: ["graphs", "productivity", "AI"],
+    name: "Digital Headquarters",
+    status: "Thinking",
+    date: "Sep 2026",
+    why: "What if a personal site was also the interface its owner used to run their work?",
+    tags: ["product", "workspace", "identity"],
     rot: -1.8,
   },
   {
     id: 2,
-    name: "Human Discovery Platform",
-    status: "Thinking",
-    date: "Mar 2025",
-    why: "Finding the right people is harder than finding information. We have search for documents but not for minds.",
-    tags: ["discovery", "community", "social"],
+    name: "Persistent Assistant Memory",
+    status: "Researching",
+    date: "Sep 2026",
+    why: "Long-running assistants shouldn't need the entire conversation to remember what actually matters.",
+    tags: ["AI", "memory", "RAG"],
     rot: 1.2,
   },
   {
     id: 3,
-    name: "Multiplayer Code Execution",
-    status: "Paused",
-    date: "Aug 2024",
-    why: "Pair programming tools feel like video calls with a shared screen. They don't feel like thinking together.",
-    tags: ["dev tools", "multiplayer", "collab"],
+    name: "Academic Document Intelligence",
+    status: "Building",
+    date: "2026",
+    why: "A study guide already describes the module. Software should be able to turn that description into usable structure.",
+    tags: ["AI", "documents", "academia"],
     rot: -0.5,
   },
   {
     id: 4,
-    name: "Sleep-Driven ML Scheduler",
-    status: "Abandoned",
-    date: "May 2023",
-    why: "Batch jobs at night, interactive queries during the day. Obvious in hindsight. Already exists.",
-    tags: ["infra", "ML", "scheduling"],
+    name: "Living Portfolio",
+    status: "Building",
+    date: "2026",
+    why: "Projects change constantly. A portfolio should be able to change with them without becoming another site to maintain.",
+    tags: ["portfolio", "systems", "publishing"],
     rot: 2.0,
   },
   {
     id: 5,
-    name: "Accent-Aware ASR",
-    status: "Paused",
-    date: "Nov 2024",
-    why: "Echo taught me the problem. I still think about it.",
-    tags: ["speech", "AI", "accessibility"],
+    name: "Persistent Multiplayer World",
+    status: "Building",
+    date: "Sep 2026",
+    why: "The world should exist independently of whoever happens to be looking at it.",
+    tags: ["multiplayer", "networking", "systems"],
     rot: -1.3,
   },
   {
     id: 6,
-    name: "Research Trail Viewer",
-    status: "Building",
-    date: "Apr 2026",
-    why: "A visual map of how a research paper came to exist — every paper it cites, visualized as a journey.",
-    tags: ["academia", "graphs", "visualization"],
+    name: "Engineering Memory",
+    status: "Researching",
+    date: "2026",
+    why: "Git remembers what changed. I want something that remembers why.",
+    tags: ["dev tools", "AI", "knowledge"],
     rot: 0.7,
   },
 ];
 
+// ─── Technologies ─────────────────────────────────────────────────────────────
+
 const techs = [
   {
     name: "TypeScript",
-    since: "2022",
-    projects: ["Meridian", "Lattice web client", "This site"],
-    why: "Needed types on a scraper that was growing too fast. The type system caught a bug before I shipped it. I was sold.",
-    evolution: "Started hating the verbosity. Now miss it when it's gone.",
-  },
-  {
-    name: "Python",
-    since: "2023",
-    projects: ["Meridian ML layer", "Echo", "Data pipelines"],
-    why: "Echo needed Whisper. Whisper needed Python. One dependency, three years of usage.",
+    since: "Core stack",
+    projects: ["Academiq", "Devfolio", "Workbench", "Phase Shift"],
+    why: "It became the common language across nearly everything I build on the web.",
     evolution:
-      "Still writing it. Still pretending I'll switch to something more performant.",
+      "Started as a safer way to write frontend code. Now I use the type system to think about APIs, state and system boundaries.",
   },
   {
-    name: "Rust",
-    since: "2024",
-    projects: ["Lattice core", "Custom serialization"],
-    why: "Rewrote a Lattice module to understand why it was slow. It was slow because I didn't understand memory. Rust forced understanding.",
-    evolution: "Humbling and then rewarding, in that order.",
+    name: "Next.js / React",
+    since: "Core stack",
+    projects: ["Academiq", "Devfolio", "Workbench", "Buhle Bezwe"],
+    why: "Most of the products I wanted to build lived somewhere between application and website.",
+    evolution:
+      "The interesting problems gradually moved from components toward architecture, data flow and product behaviour.",
   },
   {
-    name: "GLSL",
-    since: "2024",
-    projects: ["Graphics experiments", "Procedural textures"],
-    why: "I read about signed distance functions at 11pm and didn't sleep until 3am. That's usually a sign.",
-    evolution: "Not practical. Entirely worth it.",
+    name: "Supabase / PostgreSQL",
+    since: "Core stack",
+    projects: ["Devfolio", "Academiq", "Workbench"],
+    why: "I needed auth. Then realtime. Then RLS. Then synchronization. It quietly became infrastructure.",
+    evolution:
+      "I think much more carefully now about ownership, permissions, synchronization and where authoritative state lives.",
   },
   {
-    name: "Neo4j / Cypher",
-    since: "2023",
-    projects: ["Meridian v1", "Meridian v2", "Idea graph prototype"],
-    why: "Relational databases weren't built for 'find me researchers who think like this researcher.' Graph databases were.",
-    evolution: "The query language is odd. The mental model is correct.",
+    name: "AI SDK / LLM APIs",
+    since: "2026",
+    projects: ["Iris", "Workbench"],
+    why: "I became more interested in assistants that can use application state and tools than chatbots that only generate text.",
+    evolution:
+      "The focus has shifted from prompting toward context selection, tool design, token efficiency and persistent memory.",
+  },
+  {
+    name: "Python / FastAPI",
+    since: "2026",
+    projects: ["Medusa"],
+    why: "Document processing and the AI/data ecosystem made Python the practical choice for Medusa.",
+    evolution:
+      "It has become the backend side of the work that doesn't naturally belong inside a Next.js application.",
+  },
+  {
+    name: "Socket.IO / Realtime",
+    since: "2026",
+    projects: ["Phase Shift", "Devfolio"],
+    why: "Realtime features eventually made me curious about what happens when synchronization becomes the actual product.",
+    evolution:
+      "Presence and chat led toward authoritative simulation, interpolation and distributed world state.",
   },
 ];
+
+// ─── Thoughts ─────────────────────────────────────────────────────────────────
 
 const thoughts = [
   {
     id: 1,
-    date: "Jun 2026",
-    text: "The hardest part of software is knowing what not to build. Every feature is a debt. Every abstraction is a bet.",
-    tag: "building",
+    date: "Sep 2026",
+    text: "The more I build with AI, the less interesting raw generation becomes. Context, tools and memory are where the system starts becoming useful.",
+    tag: "AI",
   },
   {
     id: 2,
-    date: "May 2026",
-    text: "I've started thinking of every API as a promise. Promises can be kept, broken, or renegotiated. Most APIs are renegotiated without telling you.",
+    date: "Sep 2026",
+    text: "A viewport isn't a world. It's only one person's projection of it. That distinction changes almost everything about multiplayer architecture.",
     tag: "systems",
   },
   {
     id: 3,
-    date: "Apr 2026",
-    text: "Complexity is often just premature certainty. You add layers because you're sure something will be needed. It usually isn't.",
-    tag: "philosophy",
+    date: "Sep 2026",
+    text: "I'm becoming more interested in software that stays alive after deployment — systems I can operate, change and continue building through.",
+    tag: "building",
   },
   {
     id: 4,
-    date: "Mar 2026",
-    text: "Graph databases ruined relational models for me. Not because relational is wrong — because graphs make the shape of data visible.",
-    tag: "data",
+    date: "Aug 2026",
+    text: "Once real people start using something, the problems change. Features stop being hypothetical and small inconsistencies suddenly matter.",
+    tag: "product",
   },
   {
     id: 5,
-    date: "Feb 2026",
-    text: "Every abandoned project taught me more than a finished one. Finishing hides the rough parts. Abandoning exposes exactly where you lost the thread.",
-    tag: "reflection",
+    date: "Aug 2026",
+    text: "The hard part of Academiq isn't the dashboard. It's translating the strange rules of an academic semester into something software can understand.",
+    tag: "academia",
   },
   {
     id: 6,
-    date: "Jan 2026",
-    text: "I shipped something with a bug I knew about. Not because I was lazy — because fixing it required rethinking a decision made six months ago. That's a different kind of debt.",
-    tag: "building",
+    date: "2026",
+    text: "Git is very good at remembering what changed. I'm increasingly interested in systems that can also remember why.",
+    tag: "reflection",
   },
 ];
 
@@ -331,15 +415,21 @@ const thoughts = [
 
 const typeStyles: Record<string, string> = {
   idea: "bg-[#E9B44C]/10 text-[#E9B44C] border border-[#E9B44C]/25",
-  experiment: "bg-[#7CA982]/10 text-[#7CA982] border border-[#7CA982]/25",
+  experiment:
+    "bg-[#7CA982]/10 text-[#7CA982] border border-[#7CA982]/25",
   project:
     "bg-[rgba(240,237,230,0.06)] text-[#F0EDE6] border border-[rgba(240,237,230,0.15)]",
-  research: "bg-[#9B7ECC]/10 text-[#9B7ECC] border border-[#9B7ECC]/25",
+  research:
+    "bg-[#9B7ECC]/10 text-[#9B7ECC] border border-[#9B7ECC]/25",
   tech: "bg-[#4AADCC]/10 text-[#4AADCC] border border-[#4AADCC]/25",
-  lesson: "bg-[#CC7E7E]/10 text-[#CC7E7E] border border-[#CC7E7E]/25",
-  observation: "bg-[#9B7ECC]/10 text-[#9B7ECC] border border-[#9B7ECC]/25",
-  question: "bg-[#E9B44C]/10 text-[#E9B44C] border border-[#E9B44C]/25",
-  present: "bg-[#7CA982]/15 text-[#7CA982] border border-[#7CA982]/40",
+  lesson:
+    "bg-[#CC7E7E]/10 text-[#CC7E7E] border border-[#CC7E7E]/25",
+  observation:
+    "bg-[#9B7ECC]/10 text-[#9B7ECC] border border-[#9B7ECC]/25",
+  question:
+    "bg-[#E9B44C]/10 text-[#E9B44C] border border-[#E9B44C]/25",
+  present:
+    "bg-[#7CA982]/15 text-[#7CA982] border border-[#7CA982]/40",
 };
 
 const statusStyles: Record<string, string> = {
@@ -354,6 +444,8 @@ const statusStyles: Record<string, string> = {
   Active: "text-[#4AADCC]",
 };
 
+// ─── Main exports ─────────────────────────────────────────────────────────────
+
 export {
   statusStyles,
   typeStyles,
@@ -365,60 +457,61 @@ export {
   thinkingCards,
 };
 
-// EcosystemMap
+// ─── Ecosystem Map ────────────────────────────────────────────────────────────
+
 export const nodes = [
   {
-    id: "hdp",
-    label: "Human Discovery",
-    sub: "Platforms",
+    id: "product",
+    label: "Product",
+    sub: "Systems",
     x: 90,
     y: 200,
     type: "idea",
   },
   {
     id: "ai",
-    label: "AI Systems",
-    sub: "",
+    label: "AI",
+    sub: "Assistants",
     x: 290,
     y: 90,
     type: "experiment",
   },
   {
-    id: "aa",
+    id: "academic",
     label: "Academic",
-    sub: "Analytics",
+    sub: "Software",
     x: 510,
     y: 70,
     type: "project",
   },
   {
-    id: "ml",
-    label: "Multiplayer",
-    sub: "Networking",
+    id: "realtime",
+    label: "Realtime",
+    sub: "Systems",
     x: 240,
     y: 300,
     type: "experiment",
   },
   {
-    id: "sr",
-    label: "Speech",
-    sub: "Recognition",
+    id: "documents",
+    label: "Document",
+    sub: "Intelligence",
     x: 460,
     y: 290,
     type: "research",
   },
   {
-    id: "cg",
-    label: "Computer",
-    sub: "Graphics",
+    id: "tooling",
+    label: "Developer",
+    sub: "Tooling",
     x: 680,
     y: 170,
     type: "idea",
   },
   {
-    id: "ds",
-    label: "Distributed",
-    sub: "Systems",
+    id: "multiplayer",
+    label: "Multiplayer",
+    sub: "Architecture",
     x: 620,
     y: 360,
     type: "project",
@@ -426,14 +519,15 @@ export const nodes = [
 ];
 
 export const edges = [
-  ["hdp", "ai"],
-  ["ai", "aa"],
-  ["ai", "ml"],
-  ["ml", "sr"],
-  ["sr", "ds"],
-  ["aa", "cg"],
-  ["cg", "ds"],
-  ["aa", "sr"],
+  ["product", "ai"],
+  ["product", "realtime"],
+  ["product", "tooling"],
+  ["ai", "academic"],
+  ["ai", "documents"],
+  ["ai", "tooling"],
+  ["academic", "documents"],
+  ["realtime", "academic"],
+  ["realtime", "multiplayer"],
 ];
 
 export const nodeMap = Object.fromEntries(nodes.map((n) => [n.id, n]));
