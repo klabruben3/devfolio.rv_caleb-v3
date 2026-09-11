@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-[rgba(240,237,230,0.07)] px-8 md:px-16 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <footer className="relative border-t-3 border-[rgba(240,237,230,0.07)] px-8 md:px-16 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
       <div>
         <p
           className="text-[#F0EDE6]/80 text-sm"
@@ -12,7 +12,7 @@ export default function Footer() {
           className="text-[#7A7A6A] text-xs mt-1"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          Last updated: June 2026 · Workshop open since 2022
+          Last updated: September 2026 · Workshop open since 2022
         </p>
       </div>
 

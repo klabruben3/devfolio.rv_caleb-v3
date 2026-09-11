@@ -6,7 +6,7 @@ export default function TechEvolution() {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <section id="technologies" className="py-24 px-8 md:px-16">
+    <section id="technologies" className="py-24 px-8 md:px-16 relative">
       <div className="flex items-baseline gap-6 mb-16">
         <span
           className="text-[#7A7A6A]/20 font-mono select-none"
@@ -67,7 +67,7 @@ export default function TechEvolution() {
                   {tech.projects.slice(0, 2).map((p) => (
                     <span
                       key={p}
-                      className="text-[9px] px-2 py-0.5 border border-[rgba(240,237,230,0.1)] text-[#7A7A6A]"
+                      className="text-[9px] px-2 py-0.5 border border-[rgba(240,237,230,0.1)] bg-[#131310] text-[#7A7A6A]"
                       style={{ fontFamily: "'JetBrains Mono', monospace" }}
                     >
                       {p}

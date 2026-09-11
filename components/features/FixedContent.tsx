@@ -13,7 +13,7 @@ export default function FixedContent() {
         {mediaType === "desktop" && (
           <div className="fixed right-10 top-1/2 -translate-y-1/2 pointer-events-none">
             <div className="relative w-[700px] h-[700px]">
-              <div className="h-full w-full absolute z-15 backdrop-blur-xs" />
+              <div className="h-full w-full absolute z-15 backdrop-blur-xs bg-[#0d0d0b]/45" />
               <motion.img
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
