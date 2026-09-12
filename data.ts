@@ -41,23 +41,82 @@ const thinkingCards = [
     type: "question",
     rot: 0.6,
   },
+  {
+    id: 7,
+    topic: "Learning by Building",
+    note: "I learn fastest when the thing I want to build forces me to answer a question I cannot answer yet.",
+    type: "observation",
+    rot: -1.1,
+  },
+  {
+    id: 8,
+    topic: "Second Doors",
+    note: "I started development because I wanted another door to exist if the academic one ever closed.",
+    type: "observation",
+    rot: 1.7,
+  },
 ];
 
 // ─── Timeline ─────────────────────────────────────────────────────────────────
 
 const timelineNodes = [
   {
+    year: 2022,
+    items: [
+      {
+        label: "A second door",
+        type: "lesson",
+        desc: "Started learning web development late in the year while university felt uncertain. The goal was practical: build an employable skill that could exist independently of a degree.",
+      },
+      {
+        label: "HTML, CSS & JavaScript",
+        type: "tech",
+        desc: "Learned the browser from the ground up through YouTube, Notes for Professionals and anything else that could answer the next question.",
+      },
+      {
+        label: "Learning by building",
+        type: "lesson",
+        desc: "Instead of moving chapter by chapter, I would imagine something, find the pieces I did not understand yet, learn them, and build the idea.",
+      },
+    ],
+  },
+  {
+    year: 2023,
+    items: [
+      {
+        label: "Vanilla web foundations",
+        type: "tech",
+        desc: "Spent most of the early phase in HTML, CSS and JavaScript, using small interfaces and Frontend Mentor-style challenges to make the fundamentals feel natural.",
+      },
+      {
+        label: "Styling experiments",
+        type: "experiment",
+        desc: "Tried tools such as SCSS, then learned that extra abstraction is only useful when it actually improves the way I work.",
+      },
+      {
+        label: "React enters the picture",
+        type: "research",
+        desc: "Near the end of the first uninterrupted chapter I started exploring React. It felt like a much bigger step than the vanilla work that came before it.",
+      },
+    ],
+  },
+  {
     year: 2024,
     items: [
       {
-        label: "Devfolio begins",
-        type: "project",
-        desc: "Started building a personal portfolio. It gradually became something much less static.",
+        label: "Development interrupted",
+        type: "lesson",
+        desc: "Losing reliable access to a computer interrupted the momentum. Development became inconsistent while I took a gap year and shifted much of my attention into administrative work.",
       },
       {
-        label: "Frontend → full-stack",
-        type: "lesson",
-        desc: "UI work kept leading into auth, databases, permissions, deployment and system state.",
+        label: "The early archive",
+        type: "project",
+        desc: "The GitHub record from this period preserves the foundation: QR cards, profile pages, preview components, accordions, layout challenges, FastNote and early React experiments.",
+      },
+      {
+        label: "The method survived the gap",
+        type: "observation",
+        desc: "Even when the output slowed down, the way I learned did not change: start with a concrete thing I want to understand, then learn only what is needed to make it work.",
       },
     ],
   },
@@ -65,19 +124,34 @@ const timelineNodes = [
     year: 2025,
     items: [
       {
-        label: "Building beyond the interface",
-        type: "tech",
-        desc: "Started treating databases, authorization and realtime behaviour as part of the product rather than backend details.",
+        label: "Full-force return",
+        type: "present",
+        desc: "Returned to development with a working machine and much more urgency, this time focusing less on isolated exercises and more on projects I actually wanted to exist.",
       },
       {
-        label: "Realtime systems",
-        type: "research",
-        desc: "Presence, chat and synchronized state became recurring problems in the things I wanted to build.",
+        label: "Programming beyond the browser",
+        type: "tech",
+        desc: "University introduced Python and C++, which quickly escaped the classroom through statistical experiments, utilities and game development.",
       },
       {
-        label: "Supabase becomes infrastructure",
-        type: "tech",
-        desc: "Auth turned into RLS, realtime, storage, server-side validation and increasingly stateful applications.",
+        label: "Crash Distribution Analyzer",
+        type: "project",
+        desc: "Used Python to fit and compare statistical distributions, turning coursework and curiosity into a small analytical tool.",
+      },
+      {
+        label: "Pixel Kombat",
+        type: "project",
+        desc: "Built a C++ arcade game and started thinking about software as interacting systems rather than only pages and components.",
+      },
+      {
+        label: "Devfolio v1 → v2",
+        type: "project",
+        desc: "React became the main web framework, then Next.js and TypeScript followed. The portfolio became the place where each new layer of understanding was immediately put to work.",
+      },
+      {
+        label: "From exercises to systems",
+        type: "lesson",
+        desc: "The projects stopped existing mainly to prove that I understood a technology. Increasingly, the technology was just the means to answer a problem I cared about.",
       },
     ],
   },
@@ -85,14 +159,29 @@ const timelineNodes = [
     year: 2026,
     items: [
       {
-        label: "Devfolio v3",
+        label: "Layers",
         type: "project",
-        desc: "Rebuilt the portfolio as a realtime public/private workspace with anonymous visitors, admin auth, presence and live conversations.",
+        desc: "Started the year building a TypeScript product with Next.js, authentication, Prisma and PostgreSQL — an early sign that the work was moving beyond frontend-only concerns.",
       },
       {
         label: "Buhle Bezwe ECD",
         type: "project",
-        desc: "Shipped a client-facing website for a real early childhood development centre.",
+        desc: "Shipped a client-facing website for a real early childhood development centre, where the constraints came from an organisation rather than a coding exercise.",
+      },
+      {
+        label: "Realtime experiments",
+        type: "research",
+        desc: "Socket.IO chat experiments turned synchronization itself into something worth studying and eventually fed directly into multiplayer work.",
+      },
+      {
+        label: "Phase Shift",
+        type: "project",
+        desc: "Moved from rendering a game to thinking about an authoritative multiplayer world: server-owned simulation, persistent world space, interpolation and networked movement.",
+      },
+      {
+        label: "Devfolio v3",
+        type: "project",
+        desc: "Rebuilt the portfolio as a realtime public/private workspace with anonymous visitors, admin auth, presence, live conversations and an internal operating layer.",
       },
       {
         label: "Workbench",
@@ -102,22 +191,22 @@ const timelineNodes = [
       {
         label: "Academiq",
         type: "project",
-        desc: "Turned an academic planner into a full academic workspace and started putting it in front of real students.",
+        desc: "Turned an academic planner into a full academic workspace, put it in front of real students and began learning what changes once software has actual users.",
       },
       {
         label: "Iris",
         type: "experiment",
-        desc: "Moved from chatbot-style AI toward assistants that can selectively fetch application state and use tools.",
+        desc: "Moved from chatbot-style AI toward assistants that can selectively fetch application state, call tools and reason against structured academic context.",
       },
       {
         label: "Medusa",
         type: "research",
-        desc: "Started building a document-processing pipeline for turning university study guides into structured academic data.",
+        desc: "Separated document intelligence into a Python service for turning university study guides into validated, structured academic data.",
       },
       {
-        label: "Phase Shift",
+        label: "The compounding year",
         type: "present",
-        desc: "Currently exploring authoritative multiplayer simulation, persistent world space, interpolation and networked movement.",
+        desc: "Multiple projects now overlap instead of replacing one another. Product work, AI, databases, realtime systems, document processing and networking increasingly feed ideas into each other.",
       },
     ],
   },
@@ -132,6 +221,9 @@ const projects = [
     tagline: "An academic workspace that understands the semester",
     status: "Live",
     year: "2026 – present",
+    kind: "Product",
+    repoUrl: null,
+    liveUrl: "https://academiq-nwu.vercel.app",
     problem:
       "Academic information is fragmented across study guides, learning platforms, calendars, spreadsheets, announcements and individual module pages.",
     motivation:
@@ -143,6 +235,7 @@ const projects = [
       "Supabase",
       "PostgreSQL",
       "AI SDK",
+      "Cloudflare R2",
     ],
     lesson:
       "The difficult part isn't displaying academic data. It's modelling enough of the rules behind it that the software can actually reason about a student's semester.",
@@ -154,11 +247,14 @@ const projects = [
     name: "Devfolio v3",
     tagline: "A portfolio that became a workspace",
     status: "Active",
-    year: "2024 – present",
+    year: "2025 – present",
+    kind: "Personal system",
+    repoUrl: "https://github.com/klabruben3/devfolio.rv_caleb-v3",
+    liveUrl: "https://devfolio-rv-caleb-v3.vercel.app",
     problem:
       "Most portfolios become stale the moment they're deployed. They show work, but they don't participate in it.",
     motivation:
-      "I wanted my portfolio to feel alive — something I could operate from the inside while everyone else experiences the public-facing version.",
+      "The first version was simply a place to show what I could build. Each rebuild became a way to test how much further a personal site could go.",
     tech: [
       "Next.js",
       "React",
@@ -178,6 +274,9 @@ const projects = [
     tagline: "Engineering everything",
     status: "Active",
     year: "2026 – present",
+    kind: "Internal tool",
+    repoUrl: null,
+    liveUrl: "https://workbenchdev.vercel.app",
     problem:
       "Repositories remember code. They are much worse at remembering why the code became what it is.",
     motivation:
@@ -189,6 +288,8 @@ const projects = [
       "Supabase",
       "AI SDK",
       "OpenAI",
+      "Gemini",
+      "Groq",
     ],
     lesson:
       "AI becomes more interesting when it works against structured personal context instead of behaving like an isolated chat window.",
@@ -201,18 +302,14 @@ const projects = [
     tagline: "Documents in. Structured academic data out.",
     status: "Active",
     year: "2026 – present",
+    kind: "Backend service",
+    repoUrl: "https://github.com/klabruben3/medusa",
+    liveUrl: null,
     problem:
       "University study guides contain the information Academiq needs, but that information arrives as messy human-oriented documents rather than predictable schemas.",
     motivation:
       "Adding every module manually doesn't scale. I wanted to see how far a document-processing system could go toward building modules automatically.",
-    tech: [
-      "Python",
-      "FastAPI",
-      "VoyageAI",
-      "ChromaDB",
-      "Groq",
-      "PDF Processing",
-    ],
+    tech: ["Python", "FastAPI", "pdfplumber", "VoyageAI", "ChromaDB", "Groq"],
     lesson:
       "Extraction isn't just an LLM problem. Layout, tables, chunking, retrieval, validation and strict schema rules often matter more than the final prompt.",
     future:
@@ -224,6 +321,9 @@ const projects = [
     tagline: "A world that exists beyond the viewport",
     status: "Active",
     year: "2026 – present",
+    kind: "Realtime system",
+    repoUrl: null,
+    liveUrl: "https://phase-shiftweb.vercel.app",
     problem:
       "Multiplayer movement becomes fragile when clients are allowed to define their own version of where the world is.",
     motivation:
@@ -234,6 +334,7 @@ const projects = [
       "Node.js",
       "Realtime",
       "Authoritative Server",
+      "Monorepo",
     ],
     lesson:
       "Screen coordinates and world coordinates are fundamentally different things. Once the server owns the world, the client becomes a projection of it.",
@@ -246,6 +347,9 @@ const projects = [
     tagline: "A digital home for a growing ECD centre",
     status: "Live",
     year: "2026",
+    kind: "Client work",
+    repoUrl: null,
+    liveUrl: "https://buhle-bezwe.vercel.app",
     problem:
       "The centre needed a modern online presence that could clearly communicate its programmes, services and identity to parents.",
     motivation:
@@ -255,6 +359,63 @@ const projects = [
       "Real products have audiences, constraints and content that exist independently of what is technically interesting to build.",
     future:
       "Parent and administrative tooling could eventually turn the public site into a larger operational platform.",
+  },
+  {
+    id: "pixel-kombat",
+    name: "Pixel Kombat",
+    tagline: "Learning systems through a C++ arcade game",
+    status: "Completed",
+    year: "2025",
+    kind: "Game",
+    repoUrl: null,
+    liveUrl: null,
+    problem:
+      "I wanted to take the C++ I was learning academically and use it in something with movement, state, rules and visible consequences.",
+    motivation:
+      "Games force many small programming ideas to work together at once. That made it a useful bridge between learning syntax and thinking in interacting systems.",
+    tech: ["C++", "Game Logic", "State", "Collision"],
+    lesson:
+      "A program becomes much easier to reason about once behaviour, state and responsibilities are separated instead of being treated as one large loop.",
+    future:
+      "Its ideas later reappeared at a much larger scale in Phase Shift, where movement and state became networked and server-authoritative.",
+  },
+  {
+    id: "crash-distribution-analyzer",
+    name: "Crash Distribution Analyzer",
+    tagline: "Statistics, probability and Python in one small tool",
+    status: "Completed",
+    year: "2025",
+    kind: "Data experiment",
+    repoUrl: "https://github.com/klabruben3/crash-distribution-analyzer",
+    liveUrl: null,
+    problem:
+      "I wanted to understand whether multiplier data could be described meaningfully by known statistical distributions instead of relying on intuition.",
+    motivation:
+      "It gave me a reason to move Python beyond coursework and use it for data analysis, plotting and probability questions I actually wanted answered.",
+    tech: ["Python", "Statistics", "Probability", "Data Analysis"],
+    lesson:
+      "Programming became more useful once I stopped seeing languages as identities and started choosing them according to the problem.",
+    future:
+      "That comfort with Python later made it a natural choice for Medusa's document and AI processing pipeline.",
+  },
+  {
+    id: "frontend-foundations",
+    name: "Frontend Foundations",
+    tagline: "The small builds that taught me how the browser works",
+    status: "Completed",
+    year: "2022 – 2024",
+    kind: "Learning archive",
+    repoUrl: null,
+    liveUrl: null,
+    problem:
+      "I needed a way to turn HTML, CSS and JavaScript from things I had read about into skills I could actually use without following a tutorial line for line.",
+    motivation:
+      "I learned fastest when I had something concrete to reproduce, change or invent — from Frontend Mentor challenges to tiny interactions and utilities.",
+    tech: ["HTML", "CSS", "JavaScript", "SCSS", "React"],
+    lesson:
+      "The habit that lasted was more important than any individual project: imagine something, find the missing knowledge, learn it, build it, then repeat.",
+    future:
+      "Those projects remain the baseline I can compare everything else against — from styling cards to designing full application systems.",
   },
 ];
 
@@ -321,24 +482,46 @@ const ideas = [
 
 const techs = [
   {
+    name: "HTML / CSS / JavaScript",
+    since: "2022",
+    projects: ["Frontend Mentor", "FastNote", "Early experiments"],
+    why: "They were the first tools I learned because they let an idea become visible immediately in the browser.",
+    evolution:
+      "What began as learning tags, selectors and DOM events became the foundation for understanding components, state, browser behaviour and every web framework that followed.",
+  },
+  {
+    name: "React",
+    since: "2023–24",
+    projects: ["Devfolio", "Frontend Foundations", "Space Tourism"],
+    why: "React was my first major step away from building pages as isolated HTML, CSS and JavaScript files. It introduced components, reusable UI and a different way of thinking about application state.",
+    evolution:
+      "I initially approached React as a frontend framework for building interfaces. Over time, components stopped being the main challenge and I became more interested in state, data flow, composition and how larger applications are structured.",
+  },
+  {
+    name: "Next.js",
+    since: "2025",
+    projects: [
+      "Devfolio",
+      "Academiq",
+      "Workbench",
+      "Buhle Bezwe",
+      "Phase Shift",
+    ],
+    why: "As the things I wanted to build became more application-like, I needed more than client-side components. Next.js gave routing, server-side work, API boundaries and application structure a natural place to live.",
+    evolution:
+      "It started as the framework I used to build React applications and gradually became the foundation for full products involving authentication, databases, server logic, storage, realtime systems and AI.",
+  },
+  {
     name: "TypeScript",
-    since: "Core stack",
+    since: "2024",
     projects: ["Academiq", "Devfolio", "Workbench", "Phase Shift"],
     why: "It became the common language across nearly everything I build on the web.",
     evolution:
-      "Started as a safer way to write frontend code. Now I use the type system to think about APIs, state and system boundaries.",
-  },
-  {
-    name: "Next.js / React",
-    since: "Core stack",
-    projects: ["Academiq", "Devfolio", "Workbench", "Buhle Bezwe"],
-    why: "Most of the products I wanted to build lived somewhere between application and website.",
-    evolution:
-      "The interesting problems gradually moved from components toward architecture, data flow and product behaviour.",
+      "Started as a safer way to write frontend code. Now I use the type system to think about APIs, shared protocols, state and system boundaries.",
   },
   {
     name: "Supabase / PostgreSQL",
-    since: "Core stack",
+    since: "2026",
     projects: ["Devfolio", "Academiq", "Workbench"],
     why: "I needed auth. Then realtime. Then RLS. Then synchronization. It quietly became infrastructure.",
     evolution:
@@ -347,26 +530,34 @@ const techs = [
   {
     name: "AI SDK / LLM APIs",
     since: "2026",
-    projects: ["Iris", "Workbench"],
+    projects: ["Iris", "Workbench", "Academiq"],
     why: "I became more interested in assistants that can use application state and tools than chatbots that only generate text.",
     evolution:
-      "The focus has shifted from prompting toward context selection, tool design, token efficiency and persistent memory.",
+      "The focus has shifted from prompting toward context selection, tool design, token efficiency, retrieval and persistent memory.",
   },
   {
     name: "Python / FastAPI",
-    since: "2026",
-    projects: ["Medusa"],
-    why: "Document processing and the AI/data ecosystem made Python the practical choice for Medusa.",
+    since: "2025",
+    projects: ["Crash Distribution Analyzer", "Medusa"],
+    why: "Python first arrived through university work, then became useful for statistics, data analysis and eventually document and AI processing.",
     evolution:
-      "It has become the backend side of the work that doesn't naturally belong inside a Next.js application.",
+      "It went from a second programming language into the backend side of work that does not naturally belong inside a Next.js application.",
+  },
+  {
+    name: "C++",
+    since: "2025",
+    projects: ["Pixel Kombat", "University coursework"],
+    why: "C++ forced me to think more explicitly about program structure, state and lower-level behaviour than web development usually required.",
+    evolution:
+      "The language itself is no longer central to my web stack, but the systems thinking it encouraged carried directly into later game and networking work.",
   },
   {
     name: "Socket.IO / Realtime",
     since: "2026",
-    projects: ["Phase Shift", "Devfolio"],
+    projects: ["Phase Shift", "Devfolio", "Simple Chat App"],
     why: "Realtime features eventually made me curious about what happens when synchronization becomes the actual product.",
     evolution:
-      "Presence and chat led toward authoritative simulation, interpolation and distributed world state.",
+      "Presence and chat led toward authoritative simulation, interpolation, shared protocols and distributed world state.",
   },
 ];
 
@@ -409,27 +600,33 @@ const thoughts = [
     text: "Git is very good at remembering what changed. I'm increasingly interested in systems that can also remember why.",
     tag: "reflection",
   },
+  {
+    id: 7,
+    date: "2022 → now",
+    text: "I never learned development particularly well by reading everything first. Give me something I want to build and a question I cannot answer yet, and the missing theory suddenly has somewhere to stick.",
+    tag: "learning",
+  },
+  {
+    id: 8,
+    date: "2022 → now",
+    text: "I started learning web development because I wanted another door to exist if university ever stopped being one. Somewhere along the way, the backup plan became something I genuinely wanted to keep building.",
+    tag: "reflection",
+  },
 ];
 
 // ─── Type badges ──────────────────────────────────────────────────────────────
 
 const typeStyles: Record<string, string> = {
   idea: "bg-[#E9B44C]/10 text-[#E9B44C] border border-[#E9B44C]/25",
-  experiment:
-    "bg-[#7CA982]/10 text-[#7CA982] border border-[#7CA982]/25",
+  experiment: "bg-[#7CA982]/10 text-[#7CA982] border border-[#7CA982]/25",
   project:
     "bg-[rgba(240,237,230,0.06)] text-[#F0EDE6] border border-[rgba(240,237,230,0.15)]",
-  research:
-    "bg-[#9B7ECC]/10 text-[#9B7ECC] border border-[#9B7ECC]/25",
+  research: "bg-[#9B7ECC]/10 text-[#9B7ECC] border border-[#9B7ECC]/25",
   tech: "bg-[#4AADCC]/10 text-[#4AADCC] border border-[#4AADCC]/25",
-  lesson:
-    "bg-[#CC7E7E]/10 text-[#CC7E7E] border border-[#CC7E7E]/25",
-  observation:
-    "bg-[#9B7ECC]/10 text-[#9B7ECC] border border-[#9B7ECC]/25",
-  question:
-    "bg-[#E9B44C]/10 text-[#E9B44C] border border-[#E9B44C]/25",
-  present:
-    "bg-[#7CA982]/15 text-[#7CA982] border border-[#7CA982]/40",
+  lesson: "bg-[#CC7E7E]/10 text-[#CC7E7E] border border-[#CC7E7E]/25",
+  observation: "bg-[#9B7ECC]/10 text-[#9B7ECC] border border-[#9B7ECC]/25",
+  question: "bg-[#E9B44C]/10 text-[#E9B44C] border border-[#E9B44C]/25",
+  present: "bg-[#7CA982]/15 text-[#7CA982] border border-[#7CA982]/40",
 };
 
 const statusStyles: Record<string, string> = {

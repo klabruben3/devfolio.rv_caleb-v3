@@ -124,6 +124,31 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Project browser scrollbar */
+.project-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(233, 180, 76, 0.45)
+    rgba(240, 237, 230, 0.04);
+}
+
+.project-scrollbar::-webkit-scrollbar {
+  width: 7px;
+}
+
+.project-scrollbar::-webkit-scrollbar-track {
+  background: rgba(240, 237, 230, 0.04);
+  border-left: 1px solid rgba(240, 237, 230, 0.05);
+}
+
+.project-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(233, 180, 76, 0.35);
+  border: 1px solid rgba(233, 180, 76, 0.15);
+}
+
+.project-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(233, 180, 76, 0.6);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

@@ -15,6 +15,8 @@ import {
 import { useMediaType } from "@/utils/mediaQuery";
 import { useEffect, useRef, useState } from "react";
 
+export const CURRENT_SECTION = "current-section";
+
 type NavLabel =
   | "Home"
   | "Evolution"
@@ -46,7 +48,6 @@ export default function Nav() {
   const [showMore, setShowMore] = useState(false);
   const containerNavRef = useRef<HTMLDivElement | null>(null);
   const navItemsRef = useRef(initialNavItems);
-  const countRef = useRef(0);
   const { pin, setPin } = usePinContext();
 
   const visibleCount =
@@ -55,20 +56,6 @@ export default function Nav() {
       : mediaType === "tablet"
         ? 3
         : navItemsRef.current.length;
-
-  const handlePinReset = (item: NavItem) => {
-    if (item.id === "Q") {
-      countRef.current++;
-    }
-  };
-
-  // Reset Pin when notebook is pressed
-  useEffect(() => {
-    if (countRef.current > 2) {
-      countRef.current = 0;
-      setPin("");
-    }
-  }, [countRef.current]);
 
   useEffect(() => {
     if (!showMore) return;
@@ -88,6 +75,10 @@ export default function Nav() {
       document.removeEventListener("pointerdown", onPointerDown);
     };
   }, [showMore]);
+
+  useEffect(() => {
+    localStorage.setItem(CURRENT_SECTION, section);
+  }, [section]);
 
   return (
     <div
@@ -115,9 +106,8 @@ export default function Nav() {
                     onClick={() => {
                       setSection(item.section);
                       setPin(pin + item.id);
-                      handlePinReset(item);
                     }}
-                    disabled={mediaType === "phone" && item.id !== "Q"}
+                    disabled={mediaType === "phone"}
                     className="relative flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors hover:text-primary cursor-pointer disabled:cursor-not-allowed"
                   >
                     {item.section === section && (
@@ -148,7 +138,7 @@ export default function Nav() {
       {!(mediaType === "desktop") && (
         <motion.button
           onClick={() => setShowMore(true)}
-          className="flex justify-center items-center w-[54px] bg-card rounded-full border border-border cursor-pointer active:scale-90 transition-transform duration-250"
+          className="flex justify-center items-center w-13.5 bg-card rounded-full border border-border cursor-pointer active:scale-90 transition-transform duration-250"
           animate={{ height: showMore ? 22 : 44 }}
           transition={{ duration: 0.25 }}
         >
@@ -197,7 +187,6 @@ export default function Nav() {
                           navItemsRef.current[currentI] = temp;
                           setSection(item.section);
                           setPin(pin + item.id);
-                          handlePinReset(item);
                         }}
                         className="relative flex items-center justify-end gap-2 px-4 py-2 rounded-full text-sm transition-colors hover:text-primary cursor-pointer"
                       >

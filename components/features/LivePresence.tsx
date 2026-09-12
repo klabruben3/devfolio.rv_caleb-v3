@@ -148,7 +148,7 @@ export default function LivePresence() {
           }
         }}
         onClick={handleRequestLogin}
-        className="flex relative items-center bg-card px-5 w-fit h-[50px] rounded-full border-2 border-border z-1 active:scale-90 transition-transform duration-250"
+        className="flex relative items-center bg-card px-5 w-fit h-12.5 rounded-full border-2 border-border z-1 active:scale-90 transition-transform duration-250"
       >
         <div className="relative flex items-center">
           <span
