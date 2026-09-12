@@ -12,7 +12,7 @@ export default function FixedContent() {
       <>
         {mediaType === "desktop" && (
           <div className="fixed right-10 top-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="relative w-[700px] h-[700px]">
+            <div className="relative w-175 h-175">
               <div className="h-full w-full absolute z-15 backdrop-blur-xs bg-[#0d0d0b]/45" />
               <motion.img
                 initial={{ opacity: 0 }}
@@ -49,7 +49,7 @@ export default function FixedContent() {
             {mediaType === "desktop" && (
               <>
                 <div className="fixed right-10 top-1/2 -translate-y-1/2 pointer-events-none z-20">
-                  <div className="relative w-[700px] h-[700px]">
+                  <div className="relative w-175 h-175">
                     <motion.img
                       initial={{ opacity: 0, x: -50 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -58,7 +58,7 @@ export default function FixedContent() {
                         opacity: { duration: 0.2 },
                         x: { type: "spring", damping: 15, stiffness: 150 },
                       }}
-                      className="h-50 absolute right-[500px] top-[250px]"
+                      className="h-50 absolute right-125 top-62.5"
                       src="/block.png"
                       alt="Block Icon"
                     />

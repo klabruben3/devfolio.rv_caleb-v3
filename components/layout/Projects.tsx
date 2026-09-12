@@ -9,7 +9,7 @@ export default function Projects() {
   const project = projects.find((p) => p.id === active)!;
 
   return (
-    <section id="projects" className="px-8 lg:px-8">
+    <section id="projects" className="px-4 lg:px-8">
       {/* Section heading */}
       <div className="flex items-baseline gap-6 mb-16">
         <span

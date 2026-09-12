@@ -8,7 +8,7 @@ export default function IdeaVault() {
   const filtered = filter ? ideas.filter((i) => i.status === filter) : ideas;
 
   return (
-    <section id="ideas" className="px-8 lg:px-8">
+    <section id="ideas" className="px-4 lg:px-8">
       <div className="flex items-baseline gap-6 mb-10">
         <span
           className="text-[#7A7A6A]/20 font-mono select-none"

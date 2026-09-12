@@ -76,10 +76,6 @@ export default function Nav() {
     };
   }, [showMore]);
 
-  useEffect(() => {
-    localStorage.setItem(CURRENT_SECTION, section);
-  }, [section]);
-
   return (
     <div
       ref={containerNavRef}

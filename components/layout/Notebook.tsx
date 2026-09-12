@@ -10,7 +10,7 @@ export default function Notebook() {
     };
   
     return (
-      <section id="notebook" className="px-8 lg:px-8">
+      <section id="notebook" className="px-4 lg:px-8">
         <div className="flex items-baseline gap-6 mb-16">
           <span
             className="text-[#7A7A6A]/20 font-mono select-none"
