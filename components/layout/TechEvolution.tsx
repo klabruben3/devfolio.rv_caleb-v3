@@ -6,7 +6,7 @@ export default function TechEvolution() {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <section id="technologies" className="py-24 px-8 md:px-16 relative">
+    <section id="technologies" className="px-8 lg:px-8 relative">
       <div className="flex items-baseline gap-6 mb-16">
         <span
           className="text-[#7A7A6A]/20 font-mono select-none"

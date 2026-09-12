@@ -44,7 +44,7 @@ export default function Home() {
 
               {/* Upon offline */}
               <ConnectionStatus />
-              <main>
+              <main  className="py-24">
                 <CurrentSection />
               </main>
             </LoginContextProvider>

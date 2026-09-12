@@ -55,6 +55,62 @@ const thinkingCards = [
     type: "observation",
     rot: 1.7,
   },
+  {
+    id: 9,
+    topic: "Product Judgement",
+    note: "Being able to build something does not automatically mean it deserves to become a product.",
+    type: "observation",
+    rot: -0.7,
+  },
+  {
+    id: 10,
+    topic: "Knowing When to Stop",
+    note: "Abandoning a project can be a design decision too. Sometimes the useful idea belongs somewhere else.",
+    type: "idea",
+    rot: 1.2,
+  },
+  {
+    id: 11,
+    topic: "Context Engineering",
+    note: "The difficult part of an AI assistant is often not generating the answer. It is deciding what the model should know before answering.",
+    type: "observation",
+    rot: -1.8,
+  },
+  {
+    id: 12,
+    topic: "Persistent Memory",
+    note: "If software can remember what happened, why it happened and what changed afterwards, it starts feeling less like a tool and more like a workspace.",
+    type: "idea",
+    rot: 0.9,
+  },
+  {
+    id: 13,
+    topic: "Maintenance Cost",
+    note: "A feature is not finished when it ships. It creates something that now has to survive every version that comes after it.",
+    type: "observation",
+    rot: -1.3,
+  },
+  {
+    id: 14,
+    topic: "Source of Truth",
+    note: "Duplicated state is usually where systems begin lying to themselves.",
+    type: "observation",
+    rot: 1.6,
+  },
+  {
+    id: 15,
+    topic: "Evidence Over Titles",
+    note: "A developer's work should be able to explain their ability better than a job title ever could.",
+    type: "idea",
+    rot: -0.9,
+  },
+  {
+    id: 16,
+    topic: "Shipping",
+    note: "There is a point where another architectural improvement matters less than putting the thing in front of real people.",
+    type: "observation",
+    rot: 1.1,
+  },
 ];
 
 // ─── Timeline ─────────────────────────────────────────────────────────────────
@@ -159,7 +215,7 @@ const timelineNodes = [
     year: 2026,
     items: [
       {
-        label: "Layers",
+        label: "iLayers",
         type: "project",
         desc: "Started the year building a TypeScript product with Next.js, authentication, Prisma and PostgreSQL — an early sign that the work was moving beyond frontend-only concerns.",
       },
@@ -246,7 +302,7 @@ const projects = [
     id: "devfolio",
     name: "Devfolio v3",
     tagline: "A portfolio that became a workspace",
-    status: "Active",
+    status: "Live",
     year: "2025 – present",
     kind: "Personal system",
     repoUrl: "https://github.com/klabruben3/devfolio.rv_caleb-v3",
@@ -271,16 +327,19 @@ const projects = [
   {
     id: "workbench",
     name: "Workbench",
-    tagline: "Engineering everything",
-    status: "Active",
-    year: "2026 – present",
-    kind: "Internal tool",
+    tagline: "Your work, connected.",
+    status: "Abandoned",
+    year: "2026",
+    kind: "Developer workspace",
     repoUrl: null,
     liveUrl: "https://workbenchdev.vercel.app",
+
     problem:
-      "Repositories remember code. They are much worse at remembering why the code became what it is.",
+      "GitHub remembers code and LinkedIn remembers job titles, but neither captures the full story of how a developer's projects, ideas, decisions, experiments and knowledge evolve.",
+
     motivation:
-      "I wanted somewhere to keep projects, ideas, decisions, bugs, patterns, technologies and engineering notes connected to the actual work.",
+      "Workbench began as the private operating layer behind Devfolio — a place where I could manage the work that my public portfolio represents. It evolved into an idea for a developer workspace that connects projects, engineering notes, technologies, decisions and activity into one living system.",
+
     tech: [
       "Next.js",
       "React",
@@ -291,10 +350,15 @@ const projects = [
       "Gemini",
       "Groq",
     ],
+
     lesson:
-      "AI becomes more interesting when it works against structured personal context instead of behaving like an isolated chat window.",
+      "A developer portfolio becomes far more useful when it is a projection of an active workspace instead of a separate website that has to be maintained manually.",
+
     future:
-      "Let the workspace understand ongoing engineering work, surface patterns and eventually publish selected parts directly into Devfolio.",
+      "Some of the ideas explored here may eventually become part of Devfolio, particularly project management, contextual AI and controlling what information is exposed publicly.",
+
+    reasonToAbandon:
+      "I eventually realized that much of what Workbench was meant to become could live directly inside Devfolio. More importantly, I wasn't convinced that a standalone developer workspace solved a strong enough problem to justify turning it into its own product.",
   },
   {
     id: "medusa",
@@ -319,11 +383,11 @@ const projects = [
     id: "phase-shift",
     name: "Phase Shift",
     tagline: "A world that exists beyond the viewport",
-    status: "Active",
+    status: "Paused",
     year: "2026 – present",
     kind: "Realtime system",
     repoUrl: null,
-    liveUrl: "https://phase-shiftweb.vercel.app",
+    liveUrl: "https://phase-shift-alpha.vercel.app",
     problem:
       "Multiplayer movement becomes fragile when clients are allowed to define their own version of where the world is.",
     motivation:
@@ -661,7 +725,7 @@ export const nodes = [
     id: "product",
     label: "Product",
     sub: "Systems",
-    x: 90,
+    x: 200,
     y: 200,
     type: "idea",
   },
@@ -669,7 +733,7 @@ export const nodes = [
     id: "ai",
     label: "AI",
     sub: "Assistants",
-    x: 290,
+    x: 90,
     y: 90,
     type: "experiment",
   },

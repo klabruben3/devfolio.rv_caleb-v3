@@ -1,31 +1,74 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { timelineNodes, typeStyles } from "@/data";
 
-function getCardRotation(year: number, label: string) {
+/*
+ * Produces a stable "random-looking" rotation from
+ * the year + card label.
+ *
+ * Unlike Math.random() during render, this won't
+ * change every time React rerenders the component.
+ */
+function getCardRotation(year: string | number, label: string) {
   const seed = `${year}-${label}`;
 
   let hash = 0;
 
   for (let i = 0; i < seed.length; i++) {
-    hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
+    hash = seed.charCodeAt(i) + ((hash << 5) - hash);
   }
 
-  // Random-looking value between -1.2deg and +1.2deg
-  let rotation = (hash % 240) / 100 - 1.2;
+  /*
+   * Gives roughly:
+   *
+   * -1.8deg → +1.8deg
+   */
+  const normalized = (Math.abs(hash) % 1000) / 1000;
 
-  // Prevent cards from looking completely straight
-  if (Math.abs(rotation) < 0.2) {
-    rotation = rotation < 0 ? -0.25 : 0.25;
-  }
-
-  return rotation;
+  return normalized * 3.6 - 1.8;
 }
 
 export default function WorkshopTimeline() {
+  const timelineScrollRef = useRef<HTMLDivElement>(null);
+
+  /*
+   * Start the timeline about 10% into its
+   * available horizontal scroll distance.
+   */
+  useEffect(() => {
+    const container = timelineScrollRef.current;
+
+    if (!container) return;
+
+    const setInitialScroll = () => {
+      const maxScroll = container.scrollWidth - container.clientWidth;
+
+      /*
+       * 10% of the actual scrollable range.
+       */
+      container.scrollLeft = maxScroll * 0.1;
+    };
+
+    /*
+     * Wait for layout to finish before reading
+     * scrollWidth/clientWidth.
+     */
+    const frame = requestAnimationFrame(setInitialScroll);
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
-    <section id="timeline" className="py-24 px-8 md:px-16">
-      <div className="flex items-baseline gap-6 mb-16">
+    <section id="timeline">
+      {/* Section heading */}
+      <div className="flex items-baseline gap-6 mb-16 px-4 lg:px-8">
         <span
-          className="text-[#7A7A6A]/20 font-mono select-none"
+          className="
+            text-[#7A7A6A]/20
+            font-mono
+            select-none
+          "
           style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: "5rem",
@@ -38,7 +81,10 @@ export default function WorkshopTimeline() {
 
         <div>
           <h2
-            className="text-[#F0EDE6] leading-tight"
+            className="
+              text-[#F0EDE6]
+              leading-tight
+            "
             style={{
               fontFamily: "'DM Serif Display', serif",
               fontSize: "clamp(2rem, 4vw, 3.5rem)",
@@ -48,30 +94,62 @@ export default function WorkshopTimeline() {
           </h2>
 
           <p
-            className="text-[#7A7A6A] text-sm mt-1"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            className="
+              text-[#7A7A6A]
+              text-sm
+              mt-1
+            "
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+            }}
           >
-            An evolution map. Ideas branch. Projects merge. Knowledge compounds.
+            A timeline of experiments, projects and ideas that shaped how I
+            build.
           </p>
         </div>
       </div>
 
-      <div className="overflow-x-auto pb-4" style={{ scrollbarWidth: "none" }}>
-        <div className="flex gap-0 min-w-max">
+      {/* Horizontal timeline */}
+      <div
+        ref={timelineScrollRef}
+        className="
+          overflow-x-auto
+          pb-4
+        "
+        style={{
+          scrollbarWidth: "none",
+        }}
+      >
+        <div className="flex gap-0 min-w-max px-4">
           {timelineNodes.map((year, yi) => (
             <div
               key={year.year}
-              className="relative flex flex-col"
-              style={{ maxWidth: "500px" }}
+              className="
+                  relative
+                  flex
+                  flex-col
+                "
+              style={{
+                width: "clamp(300px, 34vw, 500px)",
+                maxWidth: "500px",
+              }}
             >
               {/* Year */}
               <div className="flex items-center mb-8">
                 <div
-                  className="px-4 py-1.5 border border-[#E9B44C]/30 text-[#E9B44C]"
+                  className="
+                      px-4
+                      py-1.5
+                      border
+                      border-[#E9B44C]/30
+                      text-[#E9B44C]
+                      shrink-0
+                    "
                   style={{
                     fontFamily: "'JetBrains Mono', monospace",
                     fontSize: "13px",
                     fontWeight: 500,
+
                     transform: `rotate(${yi % 2 === 0 ? -0.8 : 0.5}deg)`,
                   }}
                 >
@@ -79,7 +157,15 @@ export default function WorkshopTimeline() {
                 </div>
 
                 {yi < timelineNodes.length - 1 && (
-                  <div className="flex-1 border-t border-dashed border-[rgba(240,237,230,0.08)] ml-4" />
+                  <div
+                    className="
+                        flex-1
+                        border-t
+                        border-dashed
+                        border-[rgba(240,237,230,0.08)]
+                        ml-4
+                      "
+                  />
                 )}
               </div>
 
@@ -91,22 +177,32 @@ export default function WorkshopTimeline() {
                   return (
                     <div
                       key={`${year.year}-${item.label}-${ii}`}
-                      className="border border-[rgba(240,237,230,0.08)] bg-[#131310] p-4"
+                      className="
+                            border
+                            border-[rgba(240,237,230,0.08)]
+                            bg-[#131310]
+                            p-4
+                            transition-[border-color,transform]
+                            duration-300
+                            hover:border-[rgba(240,237,230,0.16)]
+                          "
                       style={{
                         transform: `rotate(${rotation}deg)`,
                       }}
                     >
+                      {/* Type */}
                       <span
                         className={`
-                          text-[8px]
-                          tracking-widest
-                          uppercase
-                          px-1.5
-                          py-0.5
-                          mb-2
-                          inline-block
-                          ${typeStyles[item.type] || typeStyles.experiment}
-                        `}
+                              text-[8px]
+                              tracking-widest
+                              uppercase
+                              px-1.5
+                              py-0.5
+                              mb-2
+                              inline-block
+
+                              ${typeStyles[item.type] || typeStyles.experiment}
+                            `}
                         style={{
                           fontFamily: "'JetBrains Mono', monospace",
                         }}
@@ -114,8 +210,14 @@ export default function WorkshopTimeline() {
                         {item.type}
                       </span>
 
+                      {/* Label */}
                       <p
-                        className="text-[#F0EDE6]/85 text-sm font-medium mb-1"
+                        className="
+                              text-[#F0EDE6]/85
+                              text-sm
+                              font-medium
+                              mb-1
+                            "
                         style={{
                           fontFamily: "'Plus Jakarta Sans', sans-serif",
                         }}
@@ -123,8 +225,13 @@ export default function WorkshopTimeline() {
                         {item.label}
                       </p>
 
+                      {/* Description */}
                       <p
-                        className="text-[#7A7A6A] text-xs leading-relaxed"
+                        className="
+                              text-[#7A7A6A]
+                              text-xs
+                              leading-relaxed
+                            "
                         style={{
                           fontFamily: "'Plus Jakarta Sans', sans-serif",
                         }}
@@ -138,6 +245,27 @@ export default function WorkshopTimeline() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Small scroll hint */}
+      <div
+        className="
+          mt-3
+          flex
+          items-center
+          gap-2
+          text-[9px]
+          tracking-widest
+          uppercase
+          text-[#7A7A6A]/45
+        "
+        style={{
+          fontFamily: "'JetBrains Mono', monospace",
+        }}
+      >
+        <span>←</span>
+        <span>drag / scroll through the timeline</span>
+        <span>→</span>
       </div>
     </section>
   );

@@ -2,7 +2,7 @@ import SignOut from "../ui/SignOut";
 
 export default function Intro() {
   return (
-    <section className="mt-18 flex flex-col justify-end pb-20 px-8 md:px-16 relative overflow-hidden">
+    <section className="flex flex-col justify-end pb-20 px-8 lg:px-8 relative overflow-hidden">
       <div className="max-w-5xl">
         <div className="mb-6 flex items-center gap-3">
           <div className="w-8 h-px bg-[#E9B44C]/60" />

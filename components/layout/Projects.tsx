@@ -9,7 +9,7 @@ export default function Projects() {
   const project = projects.find((p) => p.id === active)!;
 
   return (
-    <section id="projects" className="py-24 px-8 md:px-16">
+    <section id="projects" className="px-8 lg:px-8">
       {/* Section heading */}
       <div className="flex items-baseline gap-6 mb-16">
         <span
@@ -285,12 +285,12 @@ export default function Projects() {
               <div key={label}>
                 <p
                   className="
-                    text-[#E9B44C]/70
-                    text-[10px]
-                    tracking-widest
-                    uppercase
-                    mb-2
-                  "
+          text-[#E9B44C]/70
+          text-[10px]
+          tracking-widest
+          uppercase
+          mb-2
+        "
                   style={{ fontFamily: "'JetBrains Mono', monospace" }}
                 >
                   {label}
@@ -304,6 +304,37 @@ export default function Projects() {
                 </p>
               </div>
             ))}
+
+            {project.reasonToAbandon && (
+              <div
+                className="
+        md:col-span-2
+        border-t
+        border-[rgba(240,237,230,0.08)]
+        pt-6
+      "
+              >
+                <p
+                  className="
+          text-[#E9B44C]/70
+          text-[10px]
+          tracking-widest
+          uppercase
+          mb-2
+        "
+                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                >
+                  Why I Abandoned It
+                </p>
+
+                <p
+                  className="text-[#F0EDE6]/75 text-sm leading-relaxed max-w-4xl"
+                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                >
+                  {project.reasonToAbandon}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Public links */}

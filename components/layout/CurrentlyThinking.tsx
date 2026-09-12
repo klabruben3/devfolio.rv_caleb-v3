@@ -1,13 +1,12 @@
 "use client";
 import { useState } from "react";
-import EcosystemMap from "../features/EcosystemMap";
 import { thinkingCards, typeStyles } from "@/data";
 
 export default function CurrentlyThinking() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section id="thinking" className="py-24 px-8 md:px-16">
+    <section id="thinking" className="px-4 lg:px-8">
       <div className="flex items-baseline gap-6 mb-16">
         <span
           className="text-[#7A7A6A]/20 font-mono select-none"
@@ -40,7 +39,7 @@ export default function CurrentlyThinking() {
         </div>
       </div>
 
-      <EcosystemMap />
+      {/* {device !== "phone" && <EcosystemMap />} */}
 
       <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {thinkingCards.map((card) => (
