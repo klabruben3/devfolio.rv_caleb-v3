@@ -520,8 +520,8 @@ const projects = [
     status: "Completed",
     year: "2025",
     kind: "Game",
-    repoUrl: null,
-    liveUrl: null,
+    repoUrl: "https://github.com/klabruben3/Pixel-Kombat",
+    liveUrl: "https://pub-e0e2a034e8f444d6a0eaf223917c7e25.r2.dev/apps/pixel-kombat.zip",
     problem:
       "I wanted to take the C++ I was learning academically and use it in something with movement, state, rules and visible consequences.",
     motivation:
