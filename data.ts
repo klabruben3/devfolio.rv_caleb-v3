@@ -111,6 +111,20 @@ const thinkingCards = [
     type: "observation",
     rot: 1.1,
   },
+  {
+    id: 17,
+    topic: "Interaction Craft",
+    note: "Some projects matter less because the product survived and more because they trained my eye for motion, responsiveness and interaction.",
+    type: "observation",
+    rot: 1.5,
+  },
+  {
+    id: 18,
+    topic: "Reusable Fragments",
+    note: "Even abandoned projects tend to leave something behind: a component, a hook, an interaction pattern or a better way to structure the next build.",
+    type: "idea",
+    rot: -1.2,
+  },
 ];
 
 // ─── Timeline ─────────────────────────────────────────────────────────────────
@@ -152,13 +166,18 @@ const timelineNodes = [
       {
         label: "React enters the picture",
         type: "research",
-        desc: "Near the end of the first uninterrupted chapter I started exploring React. It felt like a much bigger step than the vanilla work that came before it.",
+        desc: "Started exploring React and component-based UI. Reuse, composition and state felt like a much bigger conceptual step than the vanilla work that came before it.",
       },
     ],
   },
   {
     year: 2024,
     items: [
+      {
+        label: "FastNote v1 → v2",
+        type: "project",
+        desc: "Built and rebuilt a small notes app mainly because I wanted another project in the toolbox. The product idea was ordinary, but the hours spent on animation, interface behaviour and JavaScript helped lock programming concepts in.",
+      },
       {
         label: "Development interrupted",
         type: "lesson",
@@ -167,7 +186,7 @@ const timelineNodes = [
       {
         label: "The early archive",
         type: "project",
-        desc: "The GitHub record from this period preserves the foundation: QR cards, profile pages, preview components, accordions, layout challenges, FastNote and early React experiments.",
+        desc: "The GitHub record from this period preserves the foundation: QR cards, profile pages, accordions, preview components, FastNote and other small browser experiments.",
       },
       {
         label: "The method survived the gap",
@@ -185,6 +204,21 @@ const timelineNodes = [
         desc: "Returned to development with a working machine and much more urgency, this time focusing less on isolated exercises and more on projects I actually wanted to exist.",
       },
       {
+        label: "Clean Chase",
+        type: "experiment",
+        desc: "Used the Canvas API to make a randomly wandering target with a chain of circles following one another. It pushed me into requestAnimationFrame, distance-based motion, responsive canvas state and early experiments with Web Workers.",
+      },
+      {
+        label: "Devfolio v1",
+        type: "project",
+        desc: "Built the first serious portfolio in React and Vite. It was still a conventional portfolio, but it became a playground for modular project previews, motion, visual identity and reusable UI.",
+      },
+      {
+        label: "Devfolio v2",
+        type: "project",
+        desc: "Rebuilt the portfolio with Next.js and TypeScript. The second version was less about proving I could make a page and more about refining interaction, composition and the way the site itself was structured.",
+      },
+      {
         label: "Programming beyond the browser",
         type: "tech",
         desc: "University introduced Python and C++, which quickly escaped the classroom through statistical experiments, utilities and game development.",
@@ -200,14 +234,9 @@ const timelineNodes = [
         desc: "Built a C++ arcade game and started thinking about software as interacting systems rather than only pages and components.",
       },
       {
-        label: "Devfolio v1 → v2",
-        type: "project",
-        desc: "React became the main web framework, then Next.js and TypeScript followed. The portfolio became the place where each new layer of understanding was immediately put to work.",
-      },
-      {
         label: "From exercises to systems",
         type: "lesson",
-        desc: "The projects stopped existing mainly to prove that I understood a technology. Increasingly, the technology was just the means to answer a problem I cared about.",
+        desc: "Projects stopped existing mainly to prove that I understood a technology. Increasingly, the technology became the means to answer a problem I cared about.",
       },
     ],
   },
@@ -215,9 +244,19 @@ const timelineNodes = [
     year: 2026,
     items: [
       {
+        label: "Space Tourism",
+        type: "project",
+        desc: "Used a Frontend Mentor challenge as a focused test of React, Next.js, TypeScript and responsive implementation without having to invent the product itself.",
+      },
+      {
         label: "iLayers",
         type: "project",
-        desc: "Started the year building a TypeScript product with Next.js, authentication, Prisma and PostgreSQL — an early sign that the work was moving beyond frontend-only concerns.",
+        desc: "Tried to turn reusable UI solutions into a community product: part component library, part social feed, with ideas around CodeSandbox and generated previews. The product thesis weakened, but the build produced a large amount of reusable responsive and interaction work.",
+      },
+      {
+        label: "Product judgement",
+        type: "lesson",
+        desc: "iLayers made an important distinction clearer: a technically ambitious build can still be solving a problem that is not valuable enough. Knowing when to stop became part of the work.",
       },
       {
         label: "Buhle Bezwe ECD",
@@ -237,12 +276,12 @@ const timelineNodes = [
       {
         label: "Devfolio v3",
         type: "project",
-        desc: "Rebuilt the portfolio as a realtime public/private workspace with anonymous visitors, admin auth, presence, live conversations and an internal operating layer.",
+        desc: "Rebuilt the portfolio again as a realtime public/private workspace with anonymous visitors, admin auth, presence, live conversations and an internal operating layer.",
       },
       {
         label: "Workbench",
         type: "project",
-        desc: "Started building an internal engineering workspace for projects, ideas, decisions, bugs, patterns and AI-assisted knowledge capture.",
+        desc: "Started building an internal engineering workspace for projects, ideas, decisions, bugs, patterns and AI-assisted knowledge capture, then folded the strongest ideas back toward Devfolio.",
       },
       {
         label: "Academiq",
@@ -262,7 +301,7 @@ const timelineNodes = [
       {
         label: "The compounding year",
         type: "present",
-        desc: "Multiple projects now overlap instead of replacing one another. Product work, AI, databases, realtime systems, document processing and networking increasingly feed ideas into each other.",
+        desc: "Multiple projects now overlap instead of replacing one another. Product work, UI craft, AI, databases, realtime systems, document processing and networking increasingly feed ideas into each other.",
       },
     ],
   },
@@ -303,7 +342,7 @@ const projects = [
     name: "Devfolio v3",
     tagline: "A portfolio that became a workspace",
     status: "Live",
-    year: "2025 – present",
+    year: "2026 – present",
     kind: "Personal system",
     repoUrl: "https://github.com/klabruben3/devfolio.rv_caleb-v3",
     liveUrl: "https://devfolio-rv-caleb-v3.vercel.app",
@@ -359,6 +398,56 @@ const projects = [
 
     reasonToAbandon:
       "I eventually realized that much of what Workbench was meant to become could live directly inside Devfolio. More importantly, I wasn't convinced that a standalone developer workspace solved a strong enough problem to justify turning it into its own product.",
+  },
+  {
+    id: "ilayers",
+    name: "iLayers",
+    tagline: "A community experiment around reusable UI solutions",
+    status: "Abandoned",
+    year: "2026",
+    kind: "Product experiment",
+    repoUrl: "https://github.com/klabruben3/layers",
+    liveUrl: "https://ilayers.vercel.app/",
+    problem:
+      "Useful interface solutions are scattered across repositories, snippets, component libraries and posts, usually without much context about where they came from or how they are actually used.",
+    motivation:
+      "ReactBits made reusable components feel discoverable. I wanted to push that idea toward a community: developers could publish solutions, attach their code, and eventually generate visual previews through tools such as CodeSandbox or Remotion so people could understand a component before opening the implementation.",
+    tech: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "NextAuth",
+      "Motion",
+      "Remotion",
+      "Tailwind CSS",
+    ],
+    lesson:
+      "A project can be technically rich and still have a weak product thesis. iLayers taught me a lot about responsive UI, reusable interaction patterns and component architecture, but it also taught me to ask whether the problem is valuable enough before continuing to deepen the architecture.",
+    future:
+      "The standalone product is not a priority, but many of its interaction patterns and reusable components can continue living inside newer projects.",
+    reasonToAbandon:
+      "I spent too much time refining responsiveness and interface details before resolving the more important architectural and product questions. Eventually I stopped believing the standalone platform was valuable enough to justify the amount of work it would require.",
+  },
+  {
+    id: "space-tourism",
+    name: "Space Tourism",
+    tagline: "A focused responsive frontend exercise in Next.js",
+    status: "Completed",
+    year: "2026",
+    kind: "Frontend challenge",
+    repoUrl: "https://github.com/klabruben3/space-tourism",
+    liveUrl: "https://space-tourism-swart-kappa.vercel.app/",
+    problem:
+      "I wanted a project where the visual target was already defined so I could focus entirely on implementation quality, responsive behaviour and translating a polished design into React.",
+    motivation:
+      "Frontend Mentor removed the need to invent a product and made the challenge much more direct: reproduce the experience accurately while testing how comfortable I had become with React, Next.js and responsive layouts.",
+    tech: ["Next.js", "React", "TypeScript", "Responsive Design", "CSS"],
+    lesson:
+      "Not every useful project needs a novel product idea. A constrained implementation challenge can expose weaknesses in layout, responsiveness and component structure much faster than an open-ended build.",
+    future:
+      "It remains a reference point for how much more deliberate my frontend implementation had become before the larger product work of 2026.",
   },
   {
     id: "medusa",
@@ -463,11 +552,93 @@ const projects = [
       "That comfort with Python later made it a natural choice for Medusa's document and AI processing pipeline.",
   },
   {
+    id: "devfolio-v2",
+    name: "Devfolio v2",
+    tagline: "The portfolio rebuild that moved me into Next.js",
+    status: "Completed",
+    year: "2025",
+    kind: "Portfolio iteration",
+    repoUrl: "https://github.com/klabruben3/devfolio.rv_caleb-v2",
+    liveUrl: "https://devfoliorvcaleb.vercel.app/",
+    problem:
+      "The first portfolio had become a snapshot of what I knew when I built it. I wanted to rebuild it with the newer tools and interaction ideas I had picked up rather than keep patching the original.",
+    motivation:
+      "Version two was where the idea of deliberately rebuilding the same personal product started to make sense: the portfolio itself could show how my engineering approach was changing.",
+    tech: ["Next.js", "React", "TypeScript", "Responsive Design", "Animation"],
+    lesson:
+      "Rebuilding the same product is useful when the goal is not cosmetic redesign but comparing two different levels of understanding. Versioning became a way to preserve that progression instead of erasing it.",
+    future:
+      "Its role is historical now; Devfolio v3 carries the living version of the idea.",
+  },
+  {
+    id: "devfolio-v1",
+    name: "Devfolio v1",
+    tagline: "The first portfolio I treated as an actual React project",
+    status: "Completed",
+    year: "2025",
+    kind: "Portfolio iteration",
+    repoUrl: "https://github.com/klabruben3/devfolio.rv-caleb",
+    liveUrl: "https://klabruben3.github.io/devfolio.rv-caleb/",
+    problem:
+      "I needed a place that could present my work while giving me enough room to experiment with the React patterns I was learning.",
+    motivation:
+      "Instead of building another isolated challenge, I wanted one project that could keep absorbing new UI ideas: project previews, skill visualisation, dynamic content and increasingly reusable components.",
+    tech: ["React", "Vite", "JavaScript", "CSS", "Component Design"],
+    lesson:
+      "A portfolio can be more than a container for finished work. For me it became a recurring engineering surface where each new idea could be tested against something I already understood.",
+    future:
+      "The project eventually gave way to v2, then v3, but the habit of using Devfolio as an experimental surface survived every rewrite.",
+  },
+  {
+    id: "clean-chase",
+    name: "Clean Chase",
+    tagline: "Random motion, chained pursuit and browser animation",
+    status: "Completed",
+    year: "2025",
+    kind: "Browser experiment",
+    repoUrl: "https://github.com/klabruben3/clean-chase",
+    liveUrl: "https://klabruben3.github.io/clean-chase/",
+    problem:
+      "I wanted motion that felt continuously alive without scripting a fixed path: one point should keep choosing new targets while a trail of other points follows it.",
+    motivation:
+      "The experiment was small enough to let me focus on the mechanics themselves — random targets, distance checks, interpolation, canvas rendering and the visual behaviour that emerges when every circle chases the one before it.",
+    tech: [
+      "JavaScript",
+      "Canvas API",
+      "requestAnimationFrame",
+      "Web Workers",
+      "Geometry",
+    ],
+    lesson:
+      "A tiny visual experiment can teach a surprising amount. Motion became a problem of state, distance and update loops rather than a CSS effect, and it was one of the first times I deliberately pushed work through lower-level browser APIs.",
+    future:
+      "The project is complete as an experiment, but the same attraction to procedural motion and systems-driven visuals keeps resurfacing in later interfaces and game work.",
+  },
+  {
+    id: "fastnote",
+    name: "FastNote 2.0",
+    tagline: "A simple notes app that became a programming practice ground",
+    status: "Completed",
+    year: "2024",
+    kind: "Learning project",
+    repoUrl: "https://github.com/klabruben3/FastNote-2.0",
+    liveUrl: "https://klabruben3.github.io/FastNote-2.0/src/",
+    problem:
+      "There was no missing note-taking product that needed to exist. I mainly wanted a complete application-shaped project where I could repeatedly practice JavaScript, interface state and animation.",
+    motivation:
+      "At that stage, having something substantial in the toolbox mattered. FastNote gave new programming concepts somewhere concrete to land, even when the product itself was solving an already-solved problem.",
+    tech: ["HTML", "CSS", "JavaScript", "DOM", "Animation"],
+    lesson:
+      "A project does not need to be commercially original to be valuable as practice. The important part was the amount of repetition: state changes, interactions, animation timing and the discipline of finishing behaviour rather than only styling screens.",
+    future:
+      "Its value is historical rather than product-oriented. It marks the point where small web exercises started turning into application-shaped builds.",
+  },
+  {
     id: "frontend-foundations",
     name: "Frontend Foundations",
     tagline: "The small builds that taught me how the browser works",
     status: "Completed",
-    year: "2022 – 2024",
+    year: "2022 – 2025",
     kind: "Learning archive",
     repoUrl: null,
     liveUrl: null,
@@ -475,7 +646,7 @@ const projects = [
       "I needed a way to turn HTML, CSS and JavaScript from things I had read about into skills I could actually use without following a tutorial line for line.",
     motivation:
       "I learned fastest when I had something concrete to reproduce, change or invent — from Frontend Mentor challenges to tiny interactions and utilities.",
-    tech: ["HTML", "CSS", "JavaScript", "SCSS", "React"],
+    tech: ["HTML", "CSS", "JavaScript", "SCSS", "React", "Canvas API"],
     lesson:
       "The habit that lasted was more important than any individual project: imagine something, find the missing knowledge, learn it, build it, then repeat.",
     future:
@@ -548,18 +719,33 @@ const techs = [
   {
     name: "HTML / CSS / JavaScript",
     since: "2022",
-    projects: ["Frontend Mentor", "FastNote", "Early experiments"],
+    projects: ["Frontend Mentor", "FastNote", "Clean Chase", "Early experiments"],
     why: "They were the first tools I learned because they let an idea become visible immediately in the browser.",
     evolution:
-      "What began as learning tags, selectors and DOM events became the foundation for understanding components, state, browser behaviour and every web framework that followed.",
+      "What began as learning tags, selectors and DOM events expanded into animation loops, canvas drawing, pointer interactions and the browser behaviour underneath every framework that followed.",
   },
   {
     name: "React",
     since: "2023–24",
-    projects: ["Devfolio", "Frontend Foundations", "Space Tourism"],
+    projects: [
+      "Devfolio v1",
+      "Devfolio v2",
+      "Devfolio v3",
+      "iLayers",
+      "Space Tourism",
+      "Frontend Foundations",
+    ],
     why: "React was my first major step away from building pages as isolated HTML, CSS and JavaScript files. It introduced components, reusable UI and a different way of thinking about application state.",
     evolution:
-      "I initially approached React as a frontend framework for building interfaces. Over time, components stopped being the main challenge and I became more interested in state, data flow, composition and how larger applications are structured.",
+      "I initially approached React as a way to build reusable interface pieces. Projects such as Devfolio and iLayers pushed that instinct hard through custom hooks, gesture handling and responsive composition; over time the harder questions moved toward state, data flow and application architecture.",
+  },
+  {
+    name: "Browser APIs / Interaction",
+    since: "2025",
+    projects: ["Clean Chase", "iLayers", "Devfolio"],
+    why: "Visual interaction kept pulling me below the component layer. Sometimes the interesting problem was not the page itself, but pointer movement, animation timing, canvas state or how an interaction should behave across screen sizes.",
+    evolution:
+      "Canvas and requestAnimationFrame led into pointer capture, gesture direction, geometry, responsive interaction hooks and small reusable UI primitives. That work is where the more artistic side of how I build tends to show up.",
   },
   {
     name: "Next.js",
@@ -578,7 +764,14 @@ const techs = [
   {
     name: "TypeScript",
     since: "2024",
-    projects: ["Academiq", "Devfolio", "Workbench", "Phase Shift"],
+    projects: [
+      "Academiq",
+      "Devfolio v2/v3",
+      "iLayers",
+      "Space Tourism",
+      "Workbench",
+      "Phase Shift",
+    ],
     why: "It became the common language across nearly everything I build on the web.",
     evolution:
       "Started as a safer way to write frontend code. Now I use the type system to think about APIs, shared protocols, state and system boundaries.",
@@ -675,6 +868,18 @@ const thoughts = [
     date: "2022 → now",
     text: "I started learning web development because I wanted another door to exist if university ever stopped being one. Somewhere along the way, the backup plan became something I genuinely wanted to keep building.",
     tag: "reflection",
+  },
+  {
+    id: 9,
+    date: "Sep 2026",
+    text: "Not every abandoned project was wasted work. iLayers did not survive as a product, but some of the interaction patterns and reusable pieces were better than the product idea that originally contained them.",
+    tag: "product",
+  },
+  {
+    id: 10,
+    date: "2025 → now",
+    text: "The artist in me keeps leaking into the engineering. I can start with a practical component and somehow end up caring about motion curves, gesture direction, timing and the tiny details of how it feels.",
+    tag: "craft",
   },
 ];
 
