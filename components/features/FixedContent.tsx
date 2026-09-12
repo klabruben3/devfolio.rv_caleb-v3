@@ -26,7 +26,7 @@ export default function FixedContent() {
             </div>
           </div>
         )}
-        {section === "intro" && (
+        {section === "intro" && mediaType === "desktop" && (
           <>
             <motion.div
               initial={{ opacity: 0 }}
