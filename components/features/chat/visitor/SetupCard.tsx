@@ -63,11 +63,10 @@ export default function SetupCard({
 
   return (
     <div
-      className="fixed bottom-5 right-5 z-50 border border-white/10 overflow-hidden"
+      className="fixed bottom-0 sm:bottom-5 right-0 sm:right-5 w-full sm:w-100 z-50 border-t-2 border-b-2 sm:border-2 border-white/10 overflow-hidden"
       style={{
         background: "#131310",
         borderRadius: "2px",
-        width: "360px",
         boxShadow: "0 16px 48px rgba(0,0,0,0.6)",
       }}
     >
@@ -151,7 +150,7 @@ export default function SetupCard({
           }}
           htmlFor="visitor-name"
         >
-          <span className="mb-[8px] block cursor-pointer active:text-white/60 tranition-[color] duration-200 w-fit">
+          <span className="mb-2 block cursor-pointer active:text-white/60 tranition-[color] duration-200 w-fit">
             What should I call you?
           </span>
           <input
@@ -194,7 +193,7 @@ export default function SetupCard({
 
           {/* Custom visual checkbox */}
           <div
-            className="mt-0.5 w-4 h-4 flex-shrink-0 flex items-center justify-center transition-colors"
+            className="mt-0.5 w-4 h-4 shrink-0 flex items-center justify-center transition-colors"
             style={{
               border: `1px solid ${agreed ? "#e9b44c" : "rgba(240,237,230,0.15)"}`,
               background: agreed ? "#e9b44c" : "transparent",

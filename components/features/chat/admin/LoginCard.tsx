@@ -54,7 +54,7 @@ export default function LoginCard() {
 
   return (
     <main
-      className="fixed bottom-5 right-5 z-50 w-full max-w-sm overflow-hidden border border-border bg-card flex flex-col"
+      className="fixed bottom-0 sm:bottom-5 right-0 sm:right-5 z-50 border-t-2 border-b-2 sm:border-2 w-full sm:w-100 overflow-hidden border border-border bg-card flex flex-col"
       style={{
         borderRadius: "var(--radius)", // Pulls your 2px sharp radius
         boxShadow: "0 16px 48px rgba(0,0,0,0.7)",

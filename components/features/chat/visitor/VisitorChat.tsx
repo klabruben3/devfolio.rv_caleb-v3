@@ -12,12 +12,10 @@ export default function VisitorChat({ onClose }: VisitorChatProp) {
 
   return (
     <div
-      className="fixed bottom-5 right-5 z-50 border border-white/10 flex flex-col overflow-hidden"
+      className="fixed bottom-0 sm:bottom-5 right-0 sm:right-5 z-50 border-t-2 border-b-2 sm:border-2 w-full sm:w-100 border-white/10 flex flex-col overflow-hidden"
       style={{
         background: "#131310",
         borderRadius: "2px",
-        width: "380px",
-        height: "auto",
         boxShadow: "0 16px 48px rgba(0,0,0,0.7)",
       }}
     >
