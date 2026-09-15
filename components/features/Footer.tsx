@@ -11,7 +11,7 @@ const socialLinks = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/ruben-caleb-b5243326b/",
+    href: "https://www.linkedin.com/in/ruben-caleb-software-developer/",
     icon: "/external-icons/linkedIn.svg",
   },
   {
