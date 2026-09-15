@@ -370,7 +370,7 @@ const projects = [
     status: "Abandoned",
     year: "2026",
     kind: "Developer workspace",
-    repoUrl: null,
+    repoUrl: "https://github.com/klabruben3/workbench",
     liveUrl: "https://workbenchdev.vercel.app",
 
     problem:
@@ -521,7 +521,8 @@ const projects = [
     year: "2025",
     kind: "Game",
     repoUrl: "https://github.com/klabruben3/Pixel-Kombat",
-    liveUrl: "https://pub-e0e2a034e8f444d6a0eaf223917c7e25.r2.dev/apps/pixel-kombat.zip",
+    liveUrl:
+      "https://pub-e0e2a034e8f444d6a0eaf223917c7e25.r2.dev/apps/pixel-kombat.zip",
     problem:
       "I wanted to take the C++ I was learning academically and use it in something with movement, state, rules and visible consequences.",
     motivation:
@@ -719,7 +720,12 @@ const techs = [
   {
     name: "HTML / CSS / JavaScript",
     since: "2022",
-    projects: ["Frontend Mentor", "FastNote", "Clean Chase", "Early experiments"],
+    projects: [
+      "Frontend Mentor",
+      "FastNote",
+      "Clean Chase",
+      "Early experiments",
+    ],
     why: "They were the first tools I learned because they let an idea become visible immediately in the browser.",
     evolution:
       "What began as learning tags, selectors and DOM events expanded into animation loops, canvas drawing, pointer interactions and the browser behaviour underneath every framework that followed.",
