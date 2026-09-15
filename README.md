@@ -1,205 +1,234 @@
 # Devfolio
 
-**Devfolio is my living developer portfolio and personal engineering workspace.**
+**A living developer portfolio and open-source architecture for building one.**
 
-It is the public-facing home for my projects, technical growth, ideas, notes, experiments, and reflections on building software.
+Devfolio is my personal digital workspace for presenting my work, technical growth, ideas, experiments, and thoughts as a software developer.
 
-Rather than treating a portfolio as a static résumé recreated on the web, Devfolio is designed as a system that evolves alongside my work.
+It is intentionally more than a static résumé or collection of project cards.
 
-Visitors can explore what I have built and what I am currently thinking about, while the authenticated workspace allows me to maintain the underlying information directly from the application.
+The portfolio is designed around structured source data and an authenticated management layer, allowing the site to evolve as I build, learn, write, and experiment without treating every update as a redesign.
+
+The repository is public so other developers can study the architecture, fork it, and adapt it into their own developer portfolio.
 
 ---
 
-## Philosophy
+## The Idea
 
-Devfolio is built around a simple idea:
+Most developer portfolios answer one question:
+
+> What has this person built?
+
+Devfolio tries to answer a few more:
+
+> What are they building now?
+> What are they learning?
+> How do they think?
+> What technologies are they exploring?
+> How has their work evolved over time?
+
+The guiding principle is:
 
 > **Show the work. Show the thinking. Show the evolution.**
 
-A project shows what was built.
+Projects demonstrate execution.
 
-A notebook entry shows what was learned.
+Thoughts provide context.
 
-An idea shows what might come next.
+Ideas show curiosity.
 
-A timeline shows how those pieces connect over time.
+Notebook entries capture learning.
 
-Together, they communicate more about an engineer than a conventional list of technologies and completed projects.
+The timeline shows progression.
+
+Together, they create a more complete representation of a developer than a traditional portfolio page.
 
 ---
 
-## Workspace
-
-Devfolio is divided into several connected areas.
+## Portfolio
 
 ### Home
 
-The entry point into the workspace.
+The entry point into the portfolio.
 
-It introduces who I am, what I work on, and the areas of software engineering I am currently exploring.
-
-The home page is primarily a presentation layer. Where possible, information displayed here is derived from the underlying portfolio data rather than maintained independently.
+It introduces who I am, what I work on, and provides a high-level view of the rest of the workspace.
 
 ---
 
 ### Projects
 
-A curated view of the software projects that best represent my work.
+A curated collection of software I've built or am actively developing.
 
-Projects can include:
+Projects can represent products, experiments, engineering challenges, or systems worth highlighting.
 
-* Production applications
-* Experiments
-* Engineering prototypes
-* Systems under active development
-* Older projects that represent important stages of growth
-
-GitHub remains the source for repositories and source code.
-
-Devfolio instead provides the **story and context around selected work** — why something was built, what problems were solved, what technologies were involved, and what was learned from it.
+The portfolio is not intended to duplicate GitHub. GitHub remains the source for repositories and code, while Devfolio provides the context around selected work.
 
 ---
 
 ### Technologies
 
-The languages, frameworks, libraries, infrastructure, platforms, and engineering tools I have worked with.
+A structured view of the languages, frameworks, platforms, databases, services, and tools I've worked with.
 
-The goal is not to maintain a decorative list of logos.
-
-Technologies exist as reusable source data that can also support other parts of the portfolio, including projects and technical experience.
-
-As my toolset evolves, the technology collection evolves with it.
-
----
-
-### Ideas
-
-A place for concepts that have not necessarily become projects yet.
-
-Ideas may include:
-
-* Product concepts
-* Engineering experiments
-* Architecture explorations
-* Developer tools
-* Systems worth investigating
-* Problems I may want to solve later
-
-This creates a visible distinction between **something I am exploring** and **something I have already built**.
+Technologies can evolve independently as new tools become part of my development stack.
 
 ---
 
 ### Thoughts
 
-Longer reflections on software engineering, products, systems, learning, and the process of becoming a better developer.
+Longer-form reflections on software engineering, technology, product development, learning, and the experience of building software.
 
-Thoughts are less about documenting syntax or implementation details and more about capturing the reasoning behind the work.
-
----
-
-### Notebook
-
-The technical working memory of the portfolio.
-
-The notebook contains smaller pieces of information such as:
-
-* Engineering notes
-* Research
-* Technical discoveries
-* Architecture observations
-* References
-* Things worth remembering
-* Lessons from debugging or building systems
-
-Unlike Thoughts, notebook entries do not need to become polished articles.
-
-They exist to preserve useful knowledge while it is still fresh.
+This section exists for ideas that need more context than a project description or notebook entry.
 
 ---
 
 ### Evolution
 
-A timeline of meaningful changes throughout my development journey.
+A timeline of meaningful milestones throughout my development journey.
 
-Instead of attempting to recreate my entire history, Evolution highlights the moments that changed how I build software:
+It captures changes in skills, projects, interests, architecture, engineering maturity, and career direction.
 
-* New technical capabilities
-* Important projects
-* Architecture milestones
-* Changes in engineering approach
-* Product-building experience
-* Lessons that influenced later work
-
-It provides context for how the current portfolio came to exist.
+Rather than maintaining a separate manually written history, the portfolio should derive timeline information from existing source data wherever possible.
 
 ---
 
-## Public and Private Workspace
+### Ideas
 
-Devfolio has two sides.
+A workspace for concepts that are still being explored.
 
-### Visitor experience
-
-Visitors interact with the public portfolio and can explore the information I have chosen to publish.
-
-The application also includes realtime visitor interaction, including the portfolio chat system.
-
-### Owner experience
-
-The same application can recognize the authenticated owner and expose management capabilities that are not available to normal visitors.
-
-The long-term goal is to manage the portfolio **from inside the portfolio itself**.
-
-That includes maintaining source information such as:
-
-* Projects
-* Technologies
-* Ideas
-* Notebook entries
-* Thoughts
-* Evolution events
-
-The public interface then reflects that data without requiring the same information to be manually maintained in several different places.
+Ideas may eventually become products, experiments, projects, or may simply remain documented thoughts worth revisiting later.
 
 ---
 
-## Portfolio Data Model
+### Notebook
 
-One of the main principles behind the current Devfolio architecture is:
+A lightweight engineering notebook for things discovered while building.
 
-> **Manage source data, not duplicated presentation data.**
+Entries can include:
 
-If information already exists somewhere authoritative in the portfolio, another section should derive from that information whenever possible.
+* Technical observations
+* Architecture notes
+* Experiments
+* Research
+* Useful references
+* Development discoveries
+* Lessons from debugging
+* Concepts worth remembering
+
+It acts as a bridge between temporary notes and more developed Thoughts.
+
+---
+
+## A Living Portfolio
+
+Devfolio is designed around the distinction between **source data** and **derived presentation**.
+
+The management layer should primarily edit information that genuinely originates in the portfolio.
 
 For example:
 
-* Technologies referenced by projects should come from the technology collection.
-* Home-page summaries should be derived from the underlying portfolio state where appropriate.
-* Timeline information should reference meaningful events rather than duplicate entire project records.
-* Project repositories remain owned by GitHub rather than being recreated as a second repository catalogue inside the portfolio.
+* Projects are managed as projects.
+* Ideas are managed as ideas.
+* Notebook entries are managed as notebook entries.
+* Thoughts are managed as thoughts.
+* Technologies are managed as technologies.
 
-This reduces the maintenance cost of keeping a living portfolio current.
+Information that can already be derived from those sources should not require a second manual copy.
+
+This keeps the portfolio maintainable as it grows and avoids turning every section into another dataset that needs to be kept synchronized by hand.
 
 ---
 
-## Realtime Chat
+## Visitor and Owner Experience
 
-Devfolio includes a Supabase-powered realtime chat system for communication between visitors and the portfolio owner.
+Devfolio supports two different ways of interacting with the same site.
 
-Visitors can enter the chat without creating a conventional account, while owner access is authenticated separately.
+### Visitors
 
-The system includes functionality such as:
+Public visitors can explore the portfolio, projects, ideas, writing, technical history, and other published content.
+
+Interactive features can also allow visitors to communicate directly through the portfolio without requiring a traditional user account.
+
+### Owner
+
+The portfolio includes an authenticated owner experience for managing the underlying content.
+
+Instead of editing hardcoded arrays every time the portfolio changes, the long-term architecture allows the portfolio owner to manage source data directly through the application.
+
+This turns the portfolio itself into the interface for maintaining the portfolio.
+
+---
+
+## Live Chat
+
+Devfolio includes a realtime visitor chat system built with Supabase.
+
+Visitors can start conversations from the portfolio while the authenticated owner can respond through the administrative experience.
+
+The system supports concepts such as:
 
 * Anonymous visitor sessions
-* Realtime conversations
-* Owner authentication
+* Authenticated owner access
+* Realtime messages
+* Conversation state
+* Unread messages
 * Presence
-* Online status
-* Chat acceptance and decline
-* Unread-message state
-* Conversation management
+* Owner online status
+* Accepting or declining conversations
 
-The chat turns the portfolio from a one-way presentation into a small interactive application.
+The feature demonstrates how a personal portfolio can also function as an interactive communication layer rather than only a collection of static pages.
+
+---
+
+## Architecture
+
+The project follows a few principles.
+
+### Source data first
+
+Each piece of information should have a clear canonical source.
+
+Derived sections should reuse existing information rather than introduce unnecessary duplicate state.
+
+### Public experience, private management
+
+The same application can expose a public portfolio while providing additional capabilities to the authenticated owner.
+
+### Content is structured
+
+Projects, technologies, notebook entries, ideas, thoughts, and milestones are treated as structured entities rather than being embedded directly into page components.
+
+### GitHub and Devfolio have different responsibilities
+
+GitHub is the source for repositories, source code, commits, and engineering history.
+
+Devfolio is the presentation and narrative layer around selected work.
+
+The goal is not to reproduce GitHub inside the portfolio.
+
+### The portfolio should evolve with the developer
+
+Adding a project, learning a technology, writing a thought, or recording an idea should naturally expand the portfolio without requiring the entire site structure to be reconsidered.
+
+---
+
+## Open Source
+
+Devfolio is also intended to serve as a starting point for developers who want to build a portfolio with similar principles.
+
+You can fork the repository and replace my content, branding, projects, and configuration with your own while retaining the underlying architecture.
+
+The architecture can be adapted into:
+
+* A traditional developer portfolio
+* A personal engineering workspace
+* A technical blog and portfolio
+* A digital résumé
+* A public engineering notebook
+* A project showcase
+* A personal digital headquarters
+
+You are not expected to reproduce my portfolio exactly.
+
+The goal of open-sourcing the project is to make the **architecture reusable**, while allowing each developer to create an experience that reflects their own work and identity.
 
 ---
 
@@ -217,79 +246,112 @@ Devfolio is built primarily with:
 * **React Markdown**
 * **remark-gfm**
 
-Supabase provides authentication, persistence, realtime communication, and presence for the interactive parts of the workspace.
-
-The application is deployed with **Vercel**.
+Supabase provides the backend foundation for authentication, realtime functionality, presence, chat, and persistent application data.
 
 ---
 
-## Design Direction
+## Project Structure
 
-Devfolio intentionally avoids the conventional portfolio structure of:
+At a high level, Devfolio separates:
 
-**Hero → About → Skills → Projects → Contact**
+**Presentation**
+Pages and components responsible for rendering the portfolio.
 
-The application is designed more like a personal digital environment.
+**Source data**
+Projects, ideas, technologies, notebook entries, thoughts, and other portfolio content.
 
-The visual language combines editorial presentation with the feeling of an engineering notebook or workshop: structured enough to communicate professionally, but personal enough to reflect the way I actually think and work.
+**Derived views**
+Sections that can be produced from existing source information rather than maintained independently.
 
-Animation and interaction are used to reinforce that experience rather than existing only as decoration.
+**Authentication**
+Owner-only access to management functionality.
+
+**Realtime systems**
+Visitor communication, messages, presence, and related interactive functionality.
+
+**Persistence**
+Supabase-backed content and application state.
+
+This separation makes it possible to evolve the public portfolio without tightly coupling presentation to content management.
 
 ---
 
-## Architecture Principles
+## Getting Started
 
-### One source of truth
+Clone the repository:
 
-Information should be owned in one meaningful place and reused elsewhere.
+```bash
+git clone https://github.com/klabruben3/devfolio.rv_caleb-v3.git
+cd devfolio.rv_caleb-v3
+```
 
-The portfolio should not require several copies of the same project, technology, milestone, or personal detail to remain synchronized manually.
+Install dependencies:
 
-### GitHub owns source code
+```bash
+npm install
+```
 
-Devfolio does not attempt to replace GitHub.
+Start the development server:
 
-GitHub remains the canonical home for repositories, commits, source history, and the complete project catalogue.
+```bash
+npm run dev
+```
 
-Devfolio provides the curated narrative around the work worth highlighting.
+Then replace the existing portfolio content, branding, links, and configuration with your own.
 
-### The portfolio should be manageable
+Features that depend on Supabase require a Supabase project and the corresponding local environment configuration.
 
-A living portfolio becomes difficult to maintain if every update requires editing source files.
+---
 
-The workspace is therefore moving toward structured content management directly from the authenticated application.
+## Customizing Your Devfolio
 
-### Public and private concerns stay separate
+A fork will typically need changes to:
 
-Visitors should see the portfolio.
+* Personal information and branding
+* Social and contact links
+* Projects
+* Technologies
+* Ideas
+* Thoughts
+* Notebook content
+* Timeline/evolution data
+* Supabase configuration
+* Authentication settings
+* Images and media
+* Metadata and SEO information
 
-The owner should be able to operate it.
+You can also remove systems you do not need.
 
-Those experiences can share the same application without sharing the same permissions.
-
-### Growth is part of the product
-
-Incomplete ideas, experiments, lessons, and changes in thinking are not treated as noise.
-
-They are part of the engineering story Devfolio is intended to preserve.
+For example, a simpler portfolio could use the same frontend architecture without the realtime chat or owner-management functionality.
 
 ---
 
 ## Direction
 
-Devfolio is gradually becoming a **digital headquarters for my engineering work**.
+Devfolio is gradually moving toward becoming a **personal digital headquarters** rather than simply a portfolio.
 
-The aim is not to turn it into another GitHub, another notes application, or another résumé builder.
+The public site remains the presentation layer, while the authenticated owner experience becomes a workspace for managing the information behind it.
 
-Instead, it should sit above those systems and connect the pieces that describe my work:
+The intended model is:
 
-* What I have built
-* What I know
-* What I am learning
-* What I am thinking about
-* What I want to build next
-* How my engineering approach is changing over time
+```text
+Create once
+    ↓
+Store as source data
+    ↓
+Reuse throughout the portfolio
+    ↓
+Derive additional views where possible
+```
 
-The portfolio should remain useful even when nobody else is viewing it.
+The less information that needs to be manually duplicated, the easier the portfolio becomes to maintain as the amount of work, writing, knowledge, and history grows.
 
-That is what makes it a workspace rather than simply a website.
+---
+
+## License
+
+This repository is open source and intended to be studied, forked, modified, and used as the foundation for other developer portfolios.
+
+My personal written content, branding, project assets, and portfolio identity remain separate from the reusable application architecture.
+
+See the repository's license for the exact terms of use.
